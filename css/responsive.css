@@ -1,0 +1,1240 @@
+/**
+ * Better QR — Complete Responsive System
+ * Comprehensive rules covering:
+ * Desktop (>850px): Preserves 2-column desktop layout
+ * Primary Breakpoint (<=850px): Deliberately designed compact tablet & mobile layout
+ * Mobile Phone Refinements (<=480px): Touch-first phone optimizations
+ * Narrow & Ultra-Compact (<=430px & <=360px): Single-column safety & tight bounds
+ * Zero unintended horizontal scroll, touch-friendly hit areas (>=44px), fluid grid layouts
+ */
+
+/* ==========================================================================
+   GLOBAL PAGE OVERFLOW & TOUCH GUARDS
+   ========================================================================== */
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+}
+
+.app-wrapper {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   DESKTOP & LARGE SCREENS (1280px - 1440px+)
+   ========================================================================== */
+
+@media (min-width: 1280px) {
+  .console-body {
+    grid-template-columns: minmax(0, 1.25fr) minmax(420px, 0.95fr);
+  }
+
+  .templates-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  }
+}
+
+/* ==========================================================================
+   TABLET LANDSCAPE & DESKTOP MEDIUM SCREENS (<= 1024px & > 850px)
+   Above 850px: Desktop layout is preserved (2-column console, side-by-side)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .console-body {
+    grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.95fr);
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .header-nav .nav-link {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .main-content {
+    padding: 0 var(--space-4) var(--space-8) var(--space-4);
+  }
+
+  .print-studio-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .bulk-grid-2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   PRIMARY RESPONSIVE BREAKPOINT: COMPACT TABLET & MOBILE (<= 850px)
+   At 850px and below: activate deliberately designed compact tablet/mobile layout
+   ========================================================================== */
+
+@media (max-width: 850px) {
+  /* 1. Main Console Stacking (QR preview on top, editor below) */
+  .console-body {
+    grid-template-columns: 1fr;
+  }
+
+  .console-right-pane {
+    order: -1;
+    border-bottom: var(--border-thick);
+    border-left: none;
+    padding: var(--space-4);
+  }
+
+  .console-left-pane {
+    border-right: none;
+    padding: var(--space-4);
+  }
+
+  .studio-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  /* 2. QR Preview Centering, Proportional Scaling & Quiet Zone Defense */
+  .preview-column {
+    position: static;
+    order: -1;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .preview-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .preview-stage {
+    min-height: 260px;
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .preview-canvas-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+
+  #qrCanvas {
+    width: 220px;
+    height: 220px;
+    max-width: 100%;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .preview-empty-state {
+    text-align: center;
+    max-width: 280px;
+    margin: 0 auto;
+    word-wrap: break-word;
+  }
+
+  .preview-meta-row {
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 10px;
+  }
+
+  .property-locks-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .locks-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .lock-toggle-btn {
+    min-height: 38px;
+  }
+
+  /* 3. Header & Responsive Navigation */
+  .site-header {
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .brand-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .brand-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .brand-title {
+    font-size: var(--font-size-md);
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  .brand-tagline {
+    font-size: 9.5px;
+  }
+
+  .btn-mobile-nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    min-height: 40px;
+    background-color: var(--color-white);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-xs);
+    font-family: var(--font-family-mono);
+    font-size: 11px;
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  .header-nav {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    order: 3;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 0 6px 0;
+    scrollbar-width: none;
+    box-sizing: border-box;
+  }
+
+  .header-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header-nav .nav-links {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    width: max-content;
+    max-width: none;
+    padding: 0 2px;
+    margin: 0;
+    list-style: none;
+    box-sizing: border-box;
+  }
+
+  .header-nav .nav-link {
+    white-space: nowrap;
+    padding: 8px 14px;
+    font-size: 11.5px;
+    min-height: var(--touch-target-min);
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    box-sizing: border-box;
+  }
+
+  .header-nav.is-open {
+    display: block;
+    overflow-x: visible;
+    padding: 10px 0;
+    border-top: 1.5px dashed rgba(23, 23, 23, 0.2);
+    margin-top: 4px;
+    animation: modalFadeIn var(--transition-fast) ease forwards;
+  }
+
+  .header-nav.is-open .nav-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    gap: 6px;
+    padding: 0;
+  }
+
+  .header-nav.is-open .nav-link {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 10px 14px;
+    font-size: 12px;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .header-status {
+    display: none;
+  }
+
+  /* 4. Workspace Toolbar (Project Selector Row, Action Grid & Undo/Redo) */
+  .console-topbar {
+    padding: 10px 12px;
+    font-size: 11px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .console-left-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .console-title {
+    flex: 1 1 100%;
+    width: 100%;
+    font-size: 11px;
+    margin-bottom: 2px;
+  }
+
+  .btn-topbar-project {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    background-color: var(--color-white);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn-topbar-project .project-name-label {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 8px;
+    font-weight: var(--font-weight-black);
+    font-size: 12px;
+  }
+
+  #btnQuickNewProject,
+  #btnQuickExportProject,
+  #btnQuickImportProject {
+    flex: 1 1 calc(33.333% - 6px);
+    min-height: 42px;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+    padding: 6px 6px;
+    box-sizing: border-box;
+  }
+
+  #btnOpenPrintStudio,
+  #btnOpenBulkStudio {
+    flex: 1 1 calc(50% - 6px);
+    min-height: 42px;
+    justify-content: center;
+    text-align: center;
+    font-size: 11.5px;
+    padding: 6px 8px;
+    box-sizing: border-box;
+  }
+
+  .console-history-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .btn-topbar-history {
+    min-height: 42px;
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+    font-size: 11px;
+  }
+
+  .console-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 4px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
+  }
+
+  /* 5. QR Payload Type Selector: Symmetrical 2-Column Responsive Grid (No Empty Boxes) */
+  .payload-type-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 6px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .payload-type-list li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  .type-tab-btn {
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+    padding: 10px 8px;
+    min-height: 48px;
+    font-size: 11.5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-sizing: border-box;
+  }
+
+  /* 6. Design Studio & Templates Gallery */
+  .studio-subtabs {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .studio-subtab {
+    padding: 8px 6px;
+    font-size: 10.5px;
+    min-height: var(--touch-target-min);
+    box-sizing: border-box;
+  }
+
+  .templates-compact-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background-color: var(--color-white);
+    border: var(--border-thick);
+    box-sizing: border-box;
+  }
+
+  .templates-summary-pill {
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  .btn-toggle-templates-gallery {
+    min-height: 40px;
+    padding: 6px 12px;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  .templates-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .palette-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .color-controls-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .design-styles-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .frame-style-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .ecl-chips {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .ecl-chip {
+    min-height: var(--touch-target-min);
+  }
+
+  /* 7. Universal Export Studio Mobile Layout (<= 850px) */
+  .export-panel {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .export-label-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .export-cat-tabs {
+    display: flex;
+    overflow-x: auto;
+    gap: 6px;
+    width: 100%;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+    padding: 2px 2px 6px 2px;
+    margin-bottom: 8px;
+    scrollbar-width: none;
+    box-sizing: border-box;
+  }
+
+  .export-cat-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .btn-export-cat {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 6px 10px;
+    font-size: 10.5px;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .export-search-mode-row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .export-search-input {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-height: 42px;
+    font-size: 12px;
+  }
+
+  .btn-toggle-bundle {
+    width: 100%;
+    min-height: 40px;
+    justify-content: center;
+    box-sizing: border-box;
+    font-size: 11.5px;
+  }
+
+  .universal-format-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    max-height: 280px;
+    box-sizing: border-box;
+    padding: 6px;
+  }
+
+  .format-card {
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 8px 10px;
+  }
+
+  .format-card-name {
+    font-size: 10.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .format-card-desc {
+    font-size: 9px;
+    line-height: 1.25;
+  }
+
+  .custom-dims-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .custom-dim-group,
+  .dim-input-wrap {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .dim-multiply {
+    display: none;
+  }
+
+  .export-summary-box {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .export-summary-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .export-filename-row {
+    flex-wrap: wrap;
+    gap: 4px;
+    word-break: break-all;
+  }
+
+  .export-controls-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .btn-main-export,
+  .btn-export-main {
+    width: 100%;
+    min-height: 48px;
+    font-size: 13px;
+    justify-content: center;
+  }
+
+  .btn-export-backup,
+  .btn-reset-export {
+    width: 100%;
+    min-height: 42px;
+    justify-content: center;
+  }
+
+  .export-format-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .pdf-options-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .pdf-field-wrap {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* 8. Bulk Studio & Print Studio Mobile Stacking */
+  .bulk-grid-2col,
+  .bulk-grid-export,
+  .bulk-config-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bulk-table-container {
+    overflow-x: auto;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+  }
+
+  .bulk-table {
+    min-width: 580px;
+  }
+
+  .bulk-step-item {
+    min-width: 100px;
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .bulk-table-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .toolbar-left,
+  .toolbar-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .print-studio-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .print-template-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .print-margins-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .print-stage-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .print-preview-container {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  #printPreviewCanvas {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .print-export-row {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .btn-print-export-main,
+  .btn-print-export-sub {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    min-height: var(--touch-target-min);
+  }
+
+  /* 9. Dialogs & Modals on <= 850px */
+  .project-modal,
+  .variations-modal,
+  .create-project-modal-box,
+  .rename-project-modal-box,
+  .confirm-modal-box {
+    max-height: 90vh;
+    width: 95vw;
+    max-width: 95vw;
+    box-sizing: border-box;
+  }
+
+  .variations-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+}
+
+/* ==========================================================================
+   TABLET PORTRAIT & MOBILE COMPATIBILITY (<= 768px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .hero-editorial {
+    padding: var(--space-3) var(--space-4);
+    margin-bottom: var(--space-3);
+    align-items: flex-start;
+  }
+
+  .hero-headline {
+    font-size: 1.85rem;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-stickers {
+    margin-top: var(--space-1);
+    flex-wrap: wrap;
+  }
+
+  .main-content {
+    padding: 0 var(--space-3) var(--space-6) var(--space-3);
+  }
+
+  .project-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .project-card-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    gap: 6px;
+    width: 100%;
+  }
+
+  .btn-card-action {
+    text-align: center;
+    min-height: 38px;
+  }
+}
+
+/* ==========================================================================
+   MEDIUM & LARGE MOBILE (<= 580px)
+   ========================================================================== */
+
+@media (max-width: 580px) {
+  .hero-headline {
+    font-size: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-xs);
+  }
+
+  .hero-stickers {
+    gap: 4px;
+  }
+
+  .hero-sticker-tag {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  .pane-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .btn-reset-payload {
+    align-self: flex-start;
+  }
+}
+
+/* ==========================================================================
+   MOBILE-SPECIFIC PHONE REFINEMENTS (<= 480px)
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  .site-header {
+    padding: 8px 10px;
+  }
+
+  .main-content {
+    padding: 0 10px 24px 10px;
+  }
+
+  .console-left-pane {
+    padding: 12px 10px;
+  }
+
+  .hero-editorial {
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .hero-headline {
+    font-size: 1.45rem;
+  }
+
+  .hero-subtitle {
+    font-size: 11px;
+  }
+
+  .console-title-text {
+    font-size: 10.5px;
+  }
+
+  .btn-topbar-project {
+    width: 100%;
+    max-width: 100%;
+    font-size: 11px;
+    padding: 8px 10px;
+    min-height: 44px;
+  }
+
+  .btn-topbar-action {
+    padding: 6px 4px;
+    font-size: 10.5px;
+    min-height: 42px;
+  }
+
+  .payload-type-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .type-tab-btn {
+    padding: 8px 4px;
+    font-size: 10.5px;
+    min-height: 44px;
+  }
+
+  .studio-subtabs {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .studio-subtab {
+    font-size: 10px;
+    min-height: 44px;
+  }
+
+  .templates-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .palette-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .frame-style-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .ecl-chips {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  #qrCanvas {
+    width: 180px;
+    height: 180px;
+  }
+
+  .preview-stage {
+    min-height: 220px;
+    padding: 12px;
+  }
+
+  .universal-format-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .format-card {
+    padding: 6px 8px;
+  }
+
+  .create-project-modal-box,
+  .rename-project-modal-box,
+  .confirm-modal-box {
+    max-width: 95vw;
+  }
+
+  .project-modal-footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .project-modal-footer button {
+    width: 100%;
+    min-height: 44px;
+  }
+}
+
+/* ==========================================================================
+   STANDARD PHONES & NARROW SCREENS (<= 430px)
+   ========================================================================== */
+
+@media (max-width: 430px) {
+  .site-header {
+    padding: 8px 10px;
+  }
+
+  .main-content {
+    padding: 0 8px 24px 8px;
+  }
+
+  .console-left-pane {
+    padding: 12px 10px;
+  }
+
+  .console-title-text {
+    font-size: 10px;
+  }
+
+  .btn-topbar-project {
+    width: 100%;
+    max-width: 100%;
+    font-size: 11px;
+    padding: 8px 10px;
+    min-height: 44px;
+  }
+
+  .btn-topbar-action {
+    padding: 6px 4px;
+    font-size: 10.5px;
+    min-height: 40px;
+  }
+
+  .design-actions-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .btn-creative-action,
+  .btn-reset-design {
+    flex: 1 1 calc(50% - 6px);
+    justify-content: center;
+    min-height: 38px;
+  }
+
+  .lock-toggle-btn {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .category-filters-row {
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    gap: 4px;
+  }
+
+  .category-pill {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 5px 10px;
+    font-size: 10px;
+    min-height: 36px;
+  }
+
+  .templates-summary-pill {
+    font-size: 10px;
+  }
+
+  .templates-count-chip {
+    font-size: 10px;
+  }
+
+  #qrCanvas {
+    width: 180px;
+    height: 180px;
+  }
+
+  .preview-stage {
+    min-height: 220px;
+    padding: 12px;
+  }
+
+  .custom-dims-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .custom-dim-group {
+    width: 100%;
+  }
+
+  .btn-main-export {
+    font-size: 12px;
+    padding: 12px;
+    min-height: var(--touch-target-min);
+  }
+
+  .create-project-modal-box,
+  .rename-project-modal-box {
+    max-width: 95vw;
+  }
+
+  .project-modal-footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .project-modal-footer button {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   COMPACT & ULTRA-NARROW SCREENS (<= 360px & 320px)
+   ========================================================================== */
+
+@media (max-width: 360px) {
+  .brand-title {
+    font-size: 14px;
+  }
+
+  .version-pill {
+    display: none;
+  }
+
+  .hero-headline {
+    font-size: 1.25rem;
+  }
+
+  .payload-type-list {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .universal-format-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .studio-subtabs {
+    grid-template-columns: 1fr;
+  }
+
+  .templates-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .palette-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .frame-style-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .export-format-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ecl-chips {
+    grid-template-columns: 1fr;
+  }
+
+  #qrCanvas {
+    width: 150px;
+    height: 150px;
+  }
+
+  .preview-stage {
+    min-height: 180px;
+    padding: 8px 6px;
+  }
+
+  .preview-canvas-wrap {
+    padding: 6px;
+    box-shadow: var(--shadow-xs);
+  }
+
+  .btn-topbar-project {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #btnOpenPrintStudio,
+  #btnOpenBulkStudio {
+    flex: 1 1 100%;
+  }
+}
+
+/* ==========================================================================
+   PRINT MEDIA STYLES
+   ========================================================================== */
+
+@media print {
+  .site-header,
+  .editor-column,
+  .export-panel,
+  .site-footer,
+  .payload-inspector-card,
+  .feedback-toast,
+  .property-locks-bar,
+  .console-topbar {
+    display: none !important;
+  }
+
+  body, .app-wrapper, .main-content {
+    background: transparent !important;
+    padding: 0 !important;
+  }
+
+  .preview-column {
+    position: static !important;
+  }
+
+  .preview-card {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .preview-stage {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .preview-canvas-wrap {
+    box-shadow: none !important;
+    border: none !important;
+  }
+}

@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Better QR — Make Every Scan Better</title>
+  <meta name="description" content="Better QR: Make Every Scan Better. Free, open-source, local-first browser QR generator with neo-brutalist styling, 20+ export formats, print layout studio, and bulk generation. Works 100% offline.">
+
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#FFE600">
+
+  <!-- Core Design System & Styles (100% Local Vanilla CSS) -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-wrapper">
+
+    <!-- Masthead / Site Header -->
+    <header class="site-header" role="banner">
+      <div class="header-inner">
+        <div class="brand-group">
+          <div class="brand-badge" aria-hidden="true">BQR</div>
+          <div class="brand-text-block">
+            <h1 class="brand-title">
+              Better QR
+              <span class="version-pill">v1.0.0</span>
+            </h1>
+            <span class="brand-tagline">Make Every Scan Better.</span>
+          </div>
+          <button type="button" class="btn-mobile-nav-toggle" id="btnMobileNavToggle" aria-expanded="false" aria-controls="headerNav" aria-label="Toggle navigation menu">
+            <span class="hamburger-box" aria-hidden="true">
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+          </button>
+        </div>
+
+        <nav class="header-nav" id="headerNav" aria-label="Primary Navigation">
+          <ul class="nav-links">
+            <li>
+              <a href="#workspace" class="nav-link is-active" id="navQrGenerator" aria-current="page">
+                <span class="nav-indicator" aria-hidden="true"></span>
+                QR Generator
+              </a>
+            </li>
+            <li>
+              <a href="#bulkStudioSection" class="nav-link" id="navBulkStudio" title="Smart Bulk Import, Generation, Export &amp; Print Studio Integration">
+                Bulk Studio
+              </a>
+            </li>
+            <li>
+              <a href="#printStudioSection" class="nav-link" id="navPrintStudio" title="Professional Print &amp; Layout Studio (Sticker Sheets, Business Cards, Badges, Posters)">
+                Print Studio
+              </a>
+            </li>
+            <li>
+              <a href="#typeNavList" class="nav-link">
+                QR Types
+              </a>
+            </li>
+            <li>
+              <a href="#designSection" class="nav-link" title="QR Design Controls, Palettes, and Styles">
+                Design Controls
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="header-status">
+          <div class="status-pill" title="All processing happens entirely in your browser. No data leaves your machine.">
+            <span class="status-indicator" aria-hidden="true"></span>
+            <span>100% Local &amp; Offline</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Editorial Hero / Editor Introduction -->
+    <section class="hero-editorial" aria-label="Studio Introduction">
+      <div class="hero-inner">
+        <div class="hero-text-group">
+          <h2 class="hero-headline">
+            <span>BETTER QR.</span>
+            <span class="hero-highlight-lime">MAKE EVERY SCAN BETTER.</span>
+          </h2>
+          <p class="hero-subtitle">
+            Better QR is the all-in-one neo-brutalist QR creation and design studio. 100% offline in-browser engine, zero tracking, 20+ export formats, print production, and bulk generation.
+          </p>
+        </div>
+        <div class="hero-stickers" aria-hidden="true">
+          <span class="hero-sticker-tag tag-pink">RAW ENGINE</span>
+          <span class="hero-sticker-tag tag-orange">ISO/IEC 18004</span>
+          <span class="hero-sticker-tag tag-blue">ZERO TRACKING</span>
+          <span class="hero-sticker-tag tag-lime">LOCAL-FIRST</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Workspace: All-In-One Immersive Console -->
+    <main class="main-content" id="mainContent" role="main">
+      <div class="workspace-console" id="workspace">
+
+        <!-- Top Studio Ribbon & Project Management (V1.5) -->
+        <div class="console-topbar">
+          <div class="console-left-group">
+            <div class="console-title">
+              <span class="console-dot" aria-hidden="true"></span>
+              <span class="console-title-text">BETTER QR WORKSPACE</span>
+            </div>
+
+            <!-- Active Project Indicator & Switcher Button -->
+            <button type="button" class="btn-topbar-project" id="btnManageProjects" title="Open Project Manager (Switch, Rename, Duplicate, or Create Projects)">
+              <span class="project-folder-icon" aria-hidden="true">📁</span>
+              <span class="project-name-label" id="topbarProjectName">Default Project</span>
+              <span class="project-dropdown-caret" aria-hidden="true">▾</span>
+            </button>
+
+            <!-- Quick New Project Button -->
+            <button type="button" class="btn-topbar-action" id="btnQuickNewProject" title="Create a new blank project">
+              <span aria-hidden="true">+</span> New
+            </button>
+
+            <!-- Quick Export Backup Button -->
+            <button type="button" class="btn-topbar-action" id="btnQuickExportProject" title="Export current project to a local file (.qrproject.json)">
+              <span aria-hidden="true">⤓</span> Export
+            </button>
+
+            <!-- Quick Import Backup Button -->
+            <button type="button" class="btn-topbar-action" id="btnQuickImportProject" title="Import a project from a local file (.qrproject.json)">
+              <span aria-hidden="true">⤒</span> Import
+            </button>
+
+            <!-- Quick Open Print Studio Button -->
+            <button type="button" class="btn-topbar-action btn-topbar-print" id="btnOpenPrintStudio" title="Open Print &amp; Layout Studio (Sticker Sheets, Business Cards, Badges, Posters)">
+              <span aria-hidden="true">🖨️</span> Print Studio
+            </button>
+
+            <!-- Quick Open Bulk Studio Button -->
+            <button type="button" class="btn-topbar-action btn-topbar-bulk" id="btnOpenBulkStudio" title="Open Bulk Studio (Import CSV/XLSX/TSV, Generate Batch QRs, Bulk Export)">
+              <span aria-hidden="true">⚡</span> Bulk Studio
+            </button>
+          </div>
+
+          <!-- History Controls (Undo / Redo) -->
+          <div class="console-history-group" role="group" aria-label="Editor History">
+            <button type="button" class="btn-topbar-history" id="btnHistoryUndo" title="Undo change (Cmd+Z / Ctrl+Z)" disabled>
+              <svg viewBox="0 0 24 24" class="history-icon" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
+              <span>Undo</span>
+            </button>
+            <button type="button" class="btn-topbar-history" id="btnHistoryRedo" title="Redo change (Cmd+Shift+Z / Ctrl+Y)" disabled>
+              <svg viewBox="0 0 24 24" class="history-icon" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5v0A5.5 5.5 0 0 0 9.5 20H13"/></svg>
+              <span>Redo</span>
+            </button>
+          </div>
+
+          <!-- Right Status Meta & Autosave -->
+          <div class="console-meta">
+            <div class="autosave-status-pill" id="autosaveStatusBadge" title="Automatic local browser save. Storage is kept on this machine.">
+              <span class="autosave-dot" aria-hidden="true"></span>
+              <span id="autosaveStatusText">Saved</span>
+            </div>
+            <span class="console-tag tag-blue">ISO/IEC 18004</span>
+          </div>
+        </div>
+
+        <div class="console-body">
+
+          <!-- Left Partition: Payload Engine & Settings -->
+          <section class="console-left-pane" aria-labelledby="editorHeading">
+            <div class="pane-header">
+              <div class="pane-title-group">
+                <h2 class="pane-title" id="editorHeading">
+                  <span class="section-num" aria-hidden="true">[01]</span>
+                  Select Payload Type
+                </h2>
+                <span class="pane-hint">6 Standard Formats</span>
+              </div>
+              <button type="button" class="btn-reset-payload" id="btnResetPayload" title="Reset current payload inputs to blank values while preserving your design">
+                <span aria-hidden="true">⌫</span>
+                <span>Reset Payload</span>
+              </button>
+            </div>
+
+            <!-- Payload Type Tabs (6 types) -->
+            <nav class="payload-type-nav" aria-label="QR payload types">
+              <ul class="payload-type-list" id="typeNavList" role="tablist">
+                <!-- Generated dynamically by editor-ui.js -->
+              </ul>
+            </nav>
+
+            <!-- Dynamic Type-Specific Form Container -->
+            <form id="payloadForm" onsubmit="return false;" novalidate>
+              <div id="formContainer">
+                <!-- Injected dynamically by editor-ui.js -->
+              </div>
+
+              <!-- QR Styling, Branding & Template Studio (V1.3 Templates & Variations) -->
+              <div class="design-section" id="designSection">
+                <div class="design-header-row">
+                  <div class="settings-label" id="designHeading">
+                    <span class="section-num" aria-hidden="true">[02]</span>
+                    Design &amp; Branding Studio
+                  </div>
+                  <div class="design-actions-cluster">
+                    <button type="button" class="btn-creative-action" id="randomizeDesignBtn" title="Randomize unlocked design properties">
+                      <span aria-hidden="true">🎲</span>
+                      <span>Randomize</span>
+                    </button>
+                    <button type="button" class="btn-creative-action btn-creative-variations" id="generateVariationsBtn" title="Generate 4 design variations from current style">
+                      <span aria-hidden="true">✨</span>
+                      <span>4 Variations</span>
+                    </button>
+                    <button type="button" class="btn-reset-design" id="resetDesignBtn" title="Reset colors, frames, logo, and background to default">
+                      <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;" aria-hidden="true">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                        <path d="M3 3v5h5"/>
+                      </svg>
+                      Reset
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Property Locks Bar for Randomization & Variations -->
+                <div class="property-locks-bar" role="toolbar" aria-label="Randomize Property Locks">
+                  <div class="locks-header">
+                    <span class="locks-label">
+                      <svg viewBox="0 0 24 24" class="locks-icon" aria-hidden="true">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                      </svg>
+                      Property Locks:
+                    </span>
+                    <span class="locks-hint">Locked properties stay frozen during Randomize &amp; Variations</span>
+                  </div>
+                  <div class="locks-cluster">
+                    <button type="button" class="lock-toggle-btn" id="lockColors" data-prop="colors" aria-pressed="false" title="Lock Colors (Palettes, Custom Hex, Background)">
+                      <span class="lock-state-icon" aria-hidden="true">🔓</span>
+                      <span>Colors</span>
+                    </button>
+                    <button type="button" class="lock-toggle-btn" id="lockModules" data-prop="modules" aria-pressed="false" title="Lock QR Module Shape (Square, Rounded, Dots)">
+                      <span class="lock-state-icon" aria-hidden="true">🔓</span>
+                      <span>Modules</span>
+                    </button>
+                    <button type="button" class="lock-toggle-btn" id="lockFinders" data-prop="finders" aria-pressed="false" title="Lock Finder Corner Style (Square, Rounded)">
+                      <span class="lock-state-icon" aria-hidden="true">🔓</span>
+                      <span>Finders</span>
+                    </button>
+                    <button type="button" class="lock-toggle-btn" id="lockFrame" data-prop="frame" aria-pressed="false" title="Lock Frame, Banner, and CTA Text">
+                      <span class="lock-state-icon" aria-hidden="true">🔓</span>
+                      <span>Frame</span>
+                    </button>
+                    <button type="button" class="btn-undo-design" id="undoDesignBtn" style="display: none;" title="Undo previous random or template change">
+                      <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;" aria-hidden="true">
+                        <path d="M9 14 4 9l5-5"/>
+                        <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/>
+                      </svg>
+                      Undo
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Studio Subtabs Navigation Bar (5 Console Subtabs) -->
+                <div class="studio-subtabs" role="tablist" aria-label="Design and Branding Controls">
+                  <button type="button" class="studio-subtab is-active" id="subtabTemplates" role="tab" aria-selected="true" aria-controls="subpanelTemplates">
+                    <svg viewBox="0 0 24 24" class="subtab-icon" aria-hidden="true">
+                      <rect x="3" y="3" width="7" height="7"/>
+                      <rect x="14" y="3" width="7" height="7"/>
+                      <rect x="14" y="14" width="7" height="7"/>
+                      <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    <span class="subtab-text-group">
+                      <span class="subtab-tag">[02.A]</span>
+                      <span class="subtab-title">Templates</span>
+                    </span>
+                    <span class="subtab-status-pill is-on" id="templatesCountBadge">12</span>
+                  </button>
+
+                  <button type="button" class="studio-subtab" id="subtabColors" role="tab" aria-selected="false" aria-controls="subpanelColors">
+                    <svg viewBox="0 0 24 24" class="subtab-icon" aria-hidden="true">
+                      <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+                      <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+                      <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+                      <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+                      <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C21.996 6.012 17.484 2 12 2z"/>
+                    </svg>
+                    <span class="subtab-text-group">
+                      <span class="subtab-tag">[02.B]</span>
+                      <span class="subtab-title">Colors &amp; Shapes</span>
+                    </span>
+                  </button>
+
+                  <button type="button" class="studio-subtab" id="subtabLogo" role="tab" aria-selected="false" aria-controls="subpanelLogo">
+                    <svg viewBox="0 0 24 24" class="subtab-icon" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span class="subtab-text-group">
+                      <span class="subtab-tag">[02.C]</span>
+                      <span class="subtab-title">Logo Badge</span>
+                    </span>
+                    <span class="subtab-status-pill" id="logoStatusBadge">OFF</span>
+                  </button>
+
+                  <button type="button" class="studio-subtab" id="subtabFrames" role="tab" aria-selected="false" aria-controls="subpanelFrames">
+                    <svg viewBox="0 0 24 24" class="subtab-icon" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <line x1="3" y1="9" x2="21" y2="9"/>
+                      <line x1="9" y1="21" x2="9" y2="9"/>
+                    </svg>
+                    <span class="subtab-text-group">
+                      <span class="subtab-tag">[02.D]</span>
+                      <span class="subtab-title">Frames &amp; CTA</span>
+                    </span>
+                    <span class="subtab-status-pill" id="frameStatusBadge">NONE</span>
+                  </button>
+
+                  <button type="button" class="studio-subtab" id="subtabBg" role="tab" aria-selected="false" aria-controls="subpanelBg">
+                    <svg viewBox="0 0 24 24" class="subtab-icon" aria-hidden="true">
+                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                      <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                    <span class="subtab-text-group">
+                      <span class="subtab-tag">[02.E]</span>
+                      <span class="subtab-title">Background</span>
+                    </span>
+                    <span class="subtab-status-pill" id="bgStatusBadge">OFF</span>
+                  </button>
+                </div>
+
+                <!-- SUBPANEL A: CURATED TEMPLATES GALLERY (Compact & Collapsible) -->
+                <div class="subpanel is-active" id="subpanelTemplates" role="tabpanel" aria-labelledby="subtabTemplates">
+                  <!-- Compact Accordion Header & Status Bar -->
+                  <div class="templates-compact-bar">
+                    <div class="templates-summary-info">
+                      <div class="templates-summary-left">
+                        <span class="design-sublabel">Templates Gallery</span>
+                        <span class="templates-summary-pill" id="templatesActiveSummary">Active: Classic Minimal</span>
+                      </div>
+                      <span class="templates-count-chip"><span id="templatesCountChipNumber">12</span> Presets Available</span>
+                    </div>
+                    <button type="button" class="btn-toggle-templates-gallery" id="btnToggleTemplatesGallery" aria-expanded="false" aria-controls="templatesCollapsibleContainer" title="Expand or collapse the curated templates gallery">
+                      <span id="templatesToggleLabel">Browse 12 Templates</span>
+                      <svg viewBox="0 0 24 24" class="toggle-chevron" aria-hidden="true">
+                        <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- Collapsible Gallery Container (Collapsed by Default) -->
+                  <div class="templates-collapsible is-collapsed" id="templatesCollapsibleContainer" aria-hidden="true">
+                    <div class="templates-intro-row">
+                      <p class="templates-intro-desc">Pick any starting direction. Customization in Colors, Logos, Frames, and Backgrounds remains 100% available afterward.</p>
+                      <button type="button" class="btn-subaction btn-collapse-inline" id="btnCollapseTemplatesGallery" title="Close template gallery">✕ Close Gallery</button>
+                    </div>
+
+                    <!-- Category Filter Pills -->
+                    <div class="category-filters-row" role="tablist" aria-label="Template categories">
+                      <button type="button" class="category-pill is-active" data-cat="all" role="tab" aria-selected="true">All (12)</button>
+                      <button type="button" class="category-pill" data-cat="minimal" role="tab" aria-selected="false">Minimal (2)</button>
+                      <button type="button" class="category-pill" data-cat="vibrant" role="tab" aria-selected="false">Vibrant (3)</button>
+                      <button type="button" class="category-pill" data-cat="professional" role="tab" aria-selected="false">Professional (2)</button>
+                      <button type="button" class="category-pill" data-cat="creative" role="tab" aria-selected="false">Creative (3)</button>
+                      <button type="button" class="category-pill" data-cat="events" role="tab" aria-selected="false">Events (2)</button>
+                    </div>
+
+                    <!-- Template Gallery Grid -->
+                    <div class="templates-grid" id="templateGrid" role="region" aria-label="Template gallery cards">
+                      <!-- Populated dynamically by editor-ui.js from QRStudio.Templates -->
+                    </div>
+
+                    <!-- Empty State for Filters -->
+                    <div class="templates-empty-state" id="templateEmptyState" style="display: none;">
+                      <p>No templates found matching this category filter.</p>
+                      <button type="button" class="btn-subaction" id="btnResetTemplateFilter">Show All Templates</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SUBPANEL B: COLORS & SHAPES -->
+                <div class="subpanel" id="subpanelColors" role="tabpanel" aria-labelledby="subtabColors" hidden>
+                  <!-- Feature B: Curated Color Palettes -->
+                  <div class="design-group">
+                    <div class="design-sublabel-row">
+                      <span class="design-sublabel">Curated Color Palettes</span>
+                      <span class="label-hint">8 High-Contrast Themes</span>
+                    </div>
+                    <div class="palette-grid" id="paletteGrid" role="radiogroup" aria-label="Curated color palettes">
+                      <!-- Populated dynamically by editor-ui.js from QRStudio.Design.PALETTES -->
+                    </div>
+                  </div>
+
+                  <!-- Feature A: Custom Foreground and Background Colors -->
+                  <div class="design-group">
+                    <div class="design-sublabel-row">
+                      <span class="design-sublabel">Custom Color Controls</span>
+                      <span class="label-hint">Live Canvas Sync</span>
+                    </div>
+                    <div class="color-controls-grid">
+                      <!-- Foreground Color -->
+                      <div class="color-control-card">
+                        <div class="color-control-header">
+                          <label class="color-card-label" for="fgColorPicker">Foreground (Dark)</label>
+                          <span class="color-role-tag">MODULES</span>
+                        </div>
+                        <div class="color-picker-input-group">
+                          <div class="color-swatch-wrapper" title="Click to choose custom foreground color">
+                            <input type="color" id="fgColorPicker" class="color-picker-native" value="#171717" aria-label="Foreground color picker">
+                            <span class="color-swatch-display" id="fgSwatchDisplay" style="background-color: #171717;" aria-hidden="true"></span>
+                          </div>
+                          <div class="hex-input-wrapper" id="fgHexWrapper" title="Enter 6-digit hex code">
+                            <span class="hex-hash" aria-hidden="true">#</span>
+                            <input type="text" id="fgHexInput" class="hex-text-input" value="171717" maxlength="6" spellcheck="false" autocomplete="off" aria-label="Foreground hex code">
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Background Color -->
+                      <div class="color-control-card">
+                        <div class="color-control-header">
+                          <label class="color-card-label" for="bgColorPicker">Background (Light)</label>
+                          <span class="color-role-tag">CANVAS</span>
+                        </div>
+                        <div class="color-picker-input-group">
+                          <div class="color-swatch-wrapper" title="Click to choose custom background color">
+                            <input type="color" id="bgColorPicker" class="color-picker-native" value="#FFFFFF" aria-label="Background color picker">
+                            <span class="color-swatch-display" id="bgSwatchDisplay" style="background-color: #FFFFFF;" aria-hidden="true"></span>
+                          </div>
+                          <div class="hex-input-wrapper" id="bgHexWrapper" title="Enter 6-digit hex code">
+                            <span class="hex-hash" aria-hidden="true">#</span>
+                            <input type="text" id="bgHexInput" class="hex-text-input" value="FFFFFF" maxlength="6" spellcheck="false" autocomplete="off" aria-label="Background hex code">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Feature C & D: QR Module & Finder Corner Styles -->
+                  <div class="design-styles-row">
+                    <!-- Feature C: Module Shape Styles -->
+                    <div class="design-subgroup">
+                      <div class="design-sublabel-row">
+                        <span class="design-sublabel">Module Style</span>
+                      </div>
+                      <div class="style-toggle-group" id="moduleStyleGroup" role="radiogroup" aria-label="QR data module style">
+                        <button type="button" class="style-toggle-btn is-active" data-style-type="module" data-style-value="square" id="moduleStyleSquare" role="radio" aria-checked="true">
+                          <span class="style-glyph glyph-square" aria-hidden="true"></span>
+                          <span>Square</span>
+                        </button>
+                        <button type="button" class="style-toggle-btn" data-style-type="module" data-style-value="rounded" id="moduleStyleRounded" role="radio" aria-checked="false">
+                          <span class="style-glyph glyph-rounded" aria-hidden="true"></span>
+                          <span>Rounded</span>
+                        </button>
+                        <button type="button" class="style-toggle-btn" data-style-type="module" data-style-value="dots" id="moduleStyleDots" role="radio" aria-checked="false">
+                          <span class="style-glyph glyph-dots" aria-hidden="true"></span>
+                          <span>Dots</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Feature D: Finder Corner Styles -->
+                    <div class="design-subgroup">
+                      <div class="design-sublabel-row">
+                        <span class="design-sublabel">Finder Corners</span>
+                      </div>
+                      <div class="style-toggle-group" id="finderStyleGroup" role="radiogroup" aria-label="QR finder pattern corner style">
+                        <button type="button" class="style-toggle-btn is-active" data-style-type="finder" data-style-value="square" id="finderStyleSquare" role="radio" aria-checked="true">
+                          <span class="style-glyph glyph-finder-square" aria-hidden="true"></span>
+                          <span>Square</span>
+                        </button>
+                        <button type="button" class="style-toggle-btn" data-style-type="finder" data-style-value="rounded" id="finderStyleRounded" role="radio" aria-checked="false">
+                          <span class="style-glyph glyph-finder-rounded" aria-hidden="true"></span>
+                          <span>Rounded</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Feature E: Contrast & Scanability Guidance Advisory Box -->
+                  <div class="contrast-advisory-card status-safe" id="contrastAdvisoryBox" role="region" aria-label="Contrast and scanability analysis">
+                    <div class="contrast-header-row">
+                      <div class="contrast-title-group">
+                        <span class="contrast-badge" id="contrastBadge">15.8:1 (AAA)</span>
+                        <strong class="contrast-heading" id="contrastHeading">High Contrast — Recommended</strong>
+                      </div>
+                      <button type="button" class="btn-restore-contrast" id="restoreContrastBtn" style="display: none;" title="Restore safe high-contrast monochrome design">
+                        Restore High Contrast
+                      </button>
+                    </div>
+                    <p class="contrast-desc" id="contrastDesc">
+                      Optimal contrast for high-speed scanning across all camera apps and hardware scanners.
+                    </p>
+                    <div class="contrast-footer-note">
+                      <strong>Scanability Advisory:</strong> Contrast ratings are algorithmic guidelines, not a scan guarantee. Always test-scan your final physical or digital output with target devices.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SUBPANEL B: LOGO BADGE -->
+                <div class="subpanel" id="subpanelLogo" role="tabpanel" aria-labelledby="subtabLogo" hidden>
+                  <div class="branding-notice-box" role="region" aria-label="Logo scanability warning">
+                    <div class="notice-icon-title">
+                      <svg viewBox="0 0 24 24" class="notice-icon" aria-hidden="true">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                      </svg>
+                      <strong>Logo Scan Reliability Warning</strong>
+                    </div>
+                    <p class="notice-desc">
+                      Logos obscure QR code data modules. We recommend <strong>High Error Correction (H, ~30%)</strong> to preserve fast, dependable scanning across mobile devices.
+                    </p>
+                    <button type="button" class="btn-subaction" id="btnSetHighEcl">
+                      Set Error Correction to High (H)
+                    </button>
+                  </div>
+
+                  <!-- Logo Upload Area -->
+                  <div class="upload-container" id="logoUploadArea">
+                    <input type="file" id="logoFileInput" class="sr-only" accept="image/png,image/jpeg,image/webp">
+                    <div class="upload-dropzone" id="logoDropzone" role="button" tabindex="0" aria-label="Upload logo image (PNG, JPEG, WebP up to 5MB)">
+                      <svg viewBox="0 0 24 24" class="dropzone-icon" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                      </svg>
+                      <div class="dropzone-text">
+                        <strong>Click or drag &amp; drop your logo</strong>
+                        <span>PNG, JPEG, or WebP (Max 5MB)</span>
+                      </div>
+                    </div>
+
+                    <!-- Active Logo Card (shown once file is loaded) -->
+                    <div class="file-active-card" id="logoActiveCard" style="display: none;">
+                      <div class="file-card-preview">
+                        <img id="logoThumbnail" alt="Uploaded Logo Preview">
+                      </div>
+                      <div class="file-card-info">
+                        <strong class="file-card-name" id="logoFilename">logo.png</strong>
+                        <span class="file-card-meta" id="logoMeta">0 × 0 px</span>
+                      </div>
+                      <div class="file-card-actions">
+                        <button type="button" class="btn-file-action" id="btnReplaceLogo" title="Replace logo with a new file">Replace</button>
+                        <button type="button" class="btn-file-action btn-danger" id="btnRemoveLogo" title="Remove logo from QR code">Remove</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Logo Positioning & Sizing Controls (shown once logo is loaded) -->
+                  <div class="logo-controls-group" id="logoControlsGroup" style="display: none;">
+                    <div class="range-control-row">
+                      <div class="range-label-group">
+                        <label for="logoSizeSlider">Logo Size</label>
+                        <span class="range-value-pill" id="logoSizeValue">22%</span>
+                      </div>
+                      <input type="range" id="logoSizeSlider" class="range-slider" min="15" max="28" step="1" value="22" aria-label="Logo size percentage">
+                      <span class="control-help">Safe range: 15% to 28% of QR matrix dimension</span>
+                    </div>
+
+                    <div class="range-control-row">
+                      <div class="range-label-group">
+                        <label for="logoPaddingSlider">Clearance Padding</label>
+                        <span class="range-value-pill" id="logoPaddingValue">6 px</span>
+                      </div>
+                      <input type="range" id="logoPaddingSlider" class="range-slider" min="2" max="16" step="1" value="6" aria-label="Logo clearance padding in pixels">
+                      <span class="control-help">Clearance margin isolating logo from adjacent QR data modules</span>
+                    </div>
+
+                    <div class="design-styles-row">
+                      <div class="design-subgroup">
+                        <div class="design-sublabel-row">
+                          <span class="design-sublabel">Clearance Badge Shape</span>
+                        </div>
+                        <div class="style-toggle-group" id="badgeShapeGroup" role="radiogroup" aria-label="Badge background shape">
+                          <button type="button" class="style-toggle-btn is-active" data-shape="rounded" role="radio" aria-checked="true">Rounded</button>
+                          <button type="button" class="style-toggle-btn" data-shape="circle" role="radio" aria-checked="false">Circle</button>
+                          <button type="button" class="style-toggle-btn" data-shape="square" role="radio" aria-checked="false">Square</button>
+                        </div>
+                      </div>
+
+                      <div class="design-subgroup">
+                        <div class="design-sublabel-row">
+                          <label class="design-sublabel" for="badgeColorPicker">Badge Fill Color</label>
+                        </div>
+                        <div class="color-picker-input-group">
+                          <div class="color-swatch-wrapper" title="Click to choose badge color">
+                            <input type="color" id="badgeColorPicker" class="color-picker-native" value="#FFFFFF" aria-label="Badge background color">
+                            <span class="color-swatch-display" id="badgeSwatchDisplay" style="background-color: #FFFFFF;" aria-hidden="true"></span>
+                          </div>
+                          <div class="hex-input-wrapper" id="badgeHexWrapper">
+                            <span class="hex-hash" aria-hidden="true">#</span>
+                            <input type="text" id="badgeHexInput" class="hex-text-input" value="FFFFFF" maxlength="6" aria-label="Badge hex code">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SUBPANEL C: FRAMES & CTA -->
+                <div class="subpanel" id="subpanelFrames" role="tabpanel" aria-labelledby="subtabFrames" hidden>
+                  <div class="design-group">
+                    <div class="design-sublabel-row">
+                      <span class="design-sublabel">Curated Frame Style</span>
+                      <span class="label-hint">5 Neo-Brutalist Layouts</span>
+                    </div>
+                    <div class="frame-style-grid" id="frameStyleGrid" role="radiogroup" aria-label="Frame style options">
+                      <button type="button" class="frame-card is-active" data-frame-style="none" role="radio" aria-checked="true">
+                        <div class="frame-icon-box frame-icon-none" aria-hidden="true"></div>
+                        <span class="frame-title">None</span>
+                        <span class="frame-desc">Pure QR</span>
+                      </button>
+                      <button type="button" class="frame-card" data-frame-style="badge" role="radio" aria-checked="false">
+                        <div class="frame-icon-box frame-icon-badge" aria-hidden="true"></div>
+                        <span class="frame-title">Badge Card</span>
+                        <span class="frame-desc">Header Pill</span>
+                      </button>
+                      <button type="button" class="frame-card" data-frame-style="top-banner" role="radio" aria-checked="false">
+                        <div class="frame-icon-box frame-icon-top" aria-hidden="true"></div>
+                        <span class="frame-title">Top Banner</span>
+                        <span class="frame-desc">Headline Bar</span>
+                      </button>
+                      <button type="button" class="frame-card" data-frame-style="bottom-bar" role="radio" aria-checked="false">
+                        <div class="frame-icon-box frame-icon-bottom" aria-hidden="true"></div>
+                        <span class="frame-title">Bottom Bar</span>
+                        <span class="frame-desc">Scan Me Bar</span>
+                      </button>
+                      <button type="button" class="frame-card" data-frame-style="ticket" role="radio" aria-checked="false">
+                        <div class="frame-icon-box frame-icon-ticket" aria-hidden="true"></div>
+                        <span class="frame-title">Ticket</span>
+                        <span class="frame-desc">Perforated Stub</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Frame Configuration (shown when frame is not 'none') -->
+                  <div class="frame-options-group" id="frameOptionsGroup" style="display: none;">
+                    <div class="design-group">
+                      <div class="design-sublabel-row">
+                        <label class="design-sublabel" for="ctaTextInput">Call-to-Action (CTA) Text</label>
+                        <span class="label-hint">Max 28 Characters</span>
+                      </div>
+                      <input type="text" id="ctaTextInput" class="text-input" value="SCAN ME" maxlength="28" placeholder="e.g. SCAN ME, VIEW MENU" autocomplete="off" spellcheck="false">
+                      
+                      <!-- Presets -->
+                      <div class="cta-presets-row" aria-label="CTA text presets">
+                        <button type="button" class="cta-preset-chip" data-preset="SCAN ME">SCAN ME</button>
+                        <button type="button" class="cta-preset-chip" data-preset="VIEW MENU">VIEW MENU</button>
+                        <button type="button" class="cta-preset-chip" data-preset="VISIT WEBSITE">VISIT WEBSITE</button>
+                        <button type="button" class="cta-preset-chip" data-preset="CONTACT US">CONTACT US</button>
+                        <button type="button" class="cta-preset-chip" data-preset="FOLLOW US">FOLLOW US</button>
+                      </div>
+                    </div>
+
+                    <div class="design-styles-row">
+                      <!-- Banner Color -->
+                      <div class="design-subgroup">
+                        <div class="design-sublabel-row">
+                          <label class="design-sublabel" for="frameBannerColorPicker">Banner Color</label>
+                        </div>
+                        <div class="color-picker-input-group">
+                          <div class="color-swatch-wrapper" title="Choose banner color">
+                            <input type="color" id="frameBannerColorPicker" class="color-picker-native" value="#FFE600" aria-label="Frame banner fill color">
+                            <span class="color-swatch-display" id="frameBannerSwatch" style="background-color: #FFE600;" aria-hidden="true"></span>
+                          </div>
+                          <div class="hex-input-wrapper" id="frameBannerHexWrapper">
+                            <span class="hex-hash" aria-hidden="true">#</span>
+                            <input type="text" id="frameBannerHexInput" class="hex-text-input" value="FFE600" maxlength="6" aria-label="Banner hex code">
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- CTA Text Color -->
+                      <div class="design-subgroup">
+                        <div class="design-sublabel-row">
+                          <label class="design-sublabel" for="frameTextColorPicker">Text Color</label>
+                        </div>
+                        <div class="color-picker-input-group">
+                          <div class="color-swatch-wrapper" title="Choose CTA text color">
+                            <input type="color" id="frameTextColorPicker" class="color-picker-native" value="#171717" aria-label="Frame text color">
+                            <span class="color-swatch-display" id="frameTextSwatch" style="background-color: #171717;" aria-hidden="true"></span>
+                          </div>
+                          <div class="hex-input-wrapper" id="frameTextHexWrapper">
+                            <span class="hex-hash" aria-hidden="true">#</span>
+                            <input type="text" id="frameTextHexInput" class="hex-text-input" value="171717" maxlength="6" aria-label="Text hex code">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="quiet-zone-notice">
+                      <svg viewBox="0 0 24 24" class="notice-icon" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                      </svg>
+                      <span><strong>Quiet Zone Preserved:</strong> Frame borders and banners are kept strictly outside the 4-module quiet zone, ensuring maximum scanner decoding reliability.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SUBPANEL D: BACKGROUND IMAGE -->
+                <div class="subpanel" id="subpanelBg" role="tabpanel" aria-labelledby="subtabBg" hidden>
+                  <!-- Background Upload Area -->
+                  <div class="upload-container" id="bgUploadArea">
+                    <input type="file" id="bgFileInput" class="sr-only" accept="image/png,image/jpeg,image/webp">
+                    <div class="upload-dropzone" id="bgDropzone" role="button" tabindex="0" aria-label="Upload background image (PNG, JPEG, WebP up to 5MB)">
+                      <svg viewBox="0 0 24 24" class="dropzone-icon" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                      </svg>
+                      <div class="dropzone-text">
+                        <strong>Click or drag &amp; drop background backdrop</strong>
+                        <span>PNG, JPEG, or WebP (Max 5MB)</span>
+                      </div>
+                    </div>
+
+                    <!-- Active Background Card (shown once file is loaded) -->
+                    <div class="file-active-card" id="bgActiveCard" style="display: none;">
+                      <div class="file-card-preview">
+                        <img id="bgThumbnail" alt="Uploaded Background Preview">
+                      </div>
+                      <div class="file-card-info">
+                        <strong class="file-card-name" id="bgFilename">backdrop.jpg</strong>
+                        <span class="file-card-meta" id="bgMeta">0 × 0 px</span>
+                      </div>
+                      <div class="file-card-actions">
+                        <button type="button" class="btn-file-action" id="btnReplaceBg" title="Replace backdrop with a new file">Replace</button>
+                        <button type="button" class="btn-file-action btn-danger" id="btnRemoveBg" title="Remove background backdrop">Remove</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Background Controls (shown once backdrop is loaded) -->
+                  <div class="bg-controls-group" id="bgControlsGroup" style="display: none;">
+                    <div class="design-styles-row">
+                      <div class="design-subgroup">
+                        <div class="design-sublabel-row">
+                          <span class="design-sublabel">Image Fit</span>
+                        </div>
+                        <div class="style-toggle-group" id="bgFitGroup" role="radiogroup" aria-label="Background image fit mode">
+                          <button type="button" class="style-toggle-btn is-active" data-fit="cover" role="radio" aria-checked="true">Cover (Fill)</button>
+                          <button type="button" class="style-toggle-btn" data-fit="contain" role="radio" aria-checked="false">Contain</button>
+                        </div>
+                      </div>
+
+                      <div class="design-subgroup">
+                        <div class="design-sublabel-row">
+                          <label class="design-sublabel" for="bgTintColorPicker">Color Tint Overlay</label>
+                        </div>
+                        <div class="color-picker-input-group">
+                          <div class="color-swatch-wrapper" title="Choose overlay tint color">
+                            <input type="color" id="bgTintColorPicker" class="color-picker-native" value="#000000" aria-label="Background tint color">
+                            <span class="color-swatch-display" id="bgTintSwatch" style="background-color: #000000;" aria-hidden="true"></span>
+                          </div>
+                          <div class="hex-input-wrapper" id="bgTintHexWrapper">
+                            <span class="hex-hash" aria-hidden="true">#</span>
+                            <input type="text" id="bgTintHexInput" class="hex-text-input" value="000000" maxlength="6" aria-label="Tint hex code">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="range-control-row">
+                      <div class="range-label-group">
+                        <label for="bgZoomSlider">Crop Zoom / Scale</label>
+                        <span class="range-value-pill" id="bgZoomValue">100%</span>
+                      </div>
+                      <input type="range" id="bgZoomSlider" class="range-slider" min="100" max="250" step="5" value="100" aria-label="Background zoom scale">
+                    </div>
+
+                    <div class="range-control-row">
+                      <div class="range-label-group">
+                        <label for="bgPanXSlider">Reposition Offset (Pan)</label>
+                        <span class="range-value-pill" id="bgPanXValue">Center (0%)</span>
+                      </div>
+                      <input type="range" id="bgPanXSlider" class="range-slider" min="-50" max="50" step="5" value="0" aria-label="Background pan offset">
+                    </div>
+
+                    <div class="range-control-row">
+                      <div class="range-label-group">
+                        <label for="bgOpacitySlider">Image Opacity</label>
+                        <span class="range-value-pill" id="bgOpacityValue">100%</span>
+                      </div>
+                      <input type="range" id="bgOpacitySlider" class="range-slider" min="10" max="100" step="5" value="100" aria-label="Background image opacity">
+                    </div>
+
+                    <div class="range-control-row">
+                      <div class="range-label-group">
+                        <label for="bgTintOpacitySlider">Tint Overlay Opacity</label>
+                        <span class="range-value-pill" id="bgTintOpacityValue">0%</span>
+                      </div>
+                      <input type="range" id="bgTintOpacitySlider" class="range-slider" min="0" max="90" step="5" value="0" aria-label="Overlay tint opacity">
+                    </div>
+
+                    <div class="contrast-guarantee-note">
+                      <svg viewBox="0 0 24 24" class="notice-icon" aria-hidden="true">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                      </svg>
+                      <span><strong>High-Contrast Backing Shield:</strong> A solid contrast backing card is rendered beneath the QR code to keep finder patterns and data modules perfectly legible over complex photo backgrounds.</span>
+                    </div>
+
+                    <div style="margin-top: 14px;">
+                      <button type="button" class="btn-subaction" id="btnResetBg">Reset Background Settings</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Error Correction Level Settings -->
+              <div class="settings-section">
+                <div class="form-label-row">
+                  <span class="settings-label" id="eclHeading">
+                    <span class="section-num" aria-hidden="true">[03]</span>
+                    Error Correction Level
+                  </span>
+                  <span class="label-hint">Higher levels increase damage recovery</span>
+                </div>
+                <div class="ecl-chips" role="radiogroup" aria-labelledby="eclHeading">
+                  <label class="ecl-chip">
+                    <input type="radio" name="ecl" value="L">
+                    <span class="ecl-chip-label">
+                      <span class="ecl-chip-title">L (Low)</span>
+                      <span class="ecl-chip-desc">~7% recovery</span>
+                    </span>
+                  </label>
+                  <label class="ecl-chip">
+                    <input type="radio" name="ecl" value="M" checked>
+                    <span class="ecl-chip-label">
+                      <span class="ecl-chip-title">M (Medium)</span>
+                      <span class="ecl-chip-desc">~15% default</span>
+                    </span>
+                  </label>
+                  <label class="ecl-chip">
+                    <input type="radio" name="ecl" value="Q">
+                    <span class="ecl-chip-label">
+                      <span class="ecl-chip-title">Q (Quartile)</span>
+                      <span class="ecl-chip-desc">~25% recovery</span>
+                    </span>
+                  </label>
+                  <label class="ecl-chip">
+                    <input type="radio" name="ecl" value="H">
+                    <span class="ecl-chip-label">
+                      <span class="ecl-chip-title">H (High)</span>
+                      <span class="ecl-chip-desc">~30% robust</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </form>
+
+            <!-- Encoded Payload String Inspector -->
+            <div class="payload-inspector-card" id="payloadInspector" aria-label="Encoded Payload Preview">
+              <div class="payload-inspector-header">
+                <span><span class="section-num" aria-hidden="true">[RAW]</span> Encoded Payload</span>
+                <button type="button" class="btn-secondary" id="copyPayloadBtn" disabled title="Copy payload string to clipboard">
+                  <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;" aria-hidden="true">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                  Copy
+                </button>
+              </div>
+              <div class="payload-preview-code" id="payloadInspectorCode" role="textbox" aria-readonly="true" tabindex="0">
+                (Awaiting valid payload input)
+              </div>
+            </div>
+          </section>
+
+          <!-- Right Partition: Real-time QR Preview & Export Command Center -->
+          <aside class="console-right-pane" aria-labelledby="previewHeading">
+            <div class="preview-header-bar">
+              <h2 class="preview-title" id="previewHeading">
+                <span class="section-num-alt" aria-hidden="true">[LIVE]</span>
+                QR Preview
+              </h2>
+              <span class="meta-badge" id="metaTypeBadge">None</span>
+            </div>
+
+            <!-- Preview Viewport -->
+            <div class="preview-stage">
+              <!-- Warning Banner for Preserved Previous Preview -->
+              <div class="preview-warning-banner" id="warningBanner" role="alert">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                  <line x1="12" y1="9" x2="12" y2="13"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <span id="warningText"></span>
+              </div>
+
+              <!-- Empty State View -->
+              <div class="preview-empty-state is-visible" id="emptyState">
+                <svg viewBox="0 0 24 24" class="empty-state-icon" aria-hidden="true">
+                  <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                  <rect x="3" y="14" width="7" height="7"/>
+                  <line x1="14" y1="14" x2="14" y2="14.01"/><line x1="17" y1="17" x2="17" y2="17.01"/>
+                  <line x1="20" y1="14" x2="20" y2="14.01"/><line x1="14" y1="20" x2="14" y2="20.01"/>
+                  <line x1="20" y1="20" x2="20" y2="20.01"/>
+                </svg>
+                <p class="empty-state-text">Enter content on the left to generate your high-contrast QR code preview.</p>
+              </div>
+
+              <!-- Live QR Canvas Wrap (Includes Quiet Zone) -->
+              <div class="preview-canvas-wrap" id="canvasWrap" style="display: none;">
+                <canvas id="qrCanvas" width="256" height="256" aria-label="Generated QR Code Preview"></canvas>
+              </div>
+            </div>
+
+            <!-- Preview Dimensions & Correction Info -->
+            <div class="preview-meta-row">
+              <span>Grid: <strong id="metaDimensionsBadge">—</strong></span>
+              <span>ECL: <strong id="metaEclBadge">M (15%)</strong></span>
+              <span>Style: <strong id="metaStyleBadge">Square</strong></span>
+              <span>Frame: <strong id="metaFrameBadge">None</strong></span>
+              <span>Logo: <strong id="metaLogoBadge">None</strong></span>
+              <span>Contrast: <strong id="metaContrastBadge">15.8:1</strong></span>
+            </div>
+
+            <!-- Section [04] Universal Export Studio -->
+            <div class="export-panel" id="exportStudioPanel" aria-labelledby="exportStudioHeading">
+              <div class="export-label-row">
+                <span class="export-step-title" id="exportStudioHeading">
+                  <span class="section-num" aria-hidden="true">[04]</span> Universal Export Studio
+                </span>
+                <span class="label-hint" id="exportStudioHint">20+ Formats &bull; Images &bull; Vector &bull; Docs &bull; Data &bull; Figma</span>
+              </div>
+
+              <!-- Category Filter Tabs -->
+              <div class="export-cat-tabs" id="exportCatTabs" role="tablist" aria-label="Export Format Categories">
+                <button type="button" class="btn-export-cat is-active" data-category="all" role="tab" aria-selected="true">All (20+)</button>
+                <button type="button" class="btn-export-cat" data-category="images" role="tab" aria-selected="false">Images (7)</button>
+                <button type="button" class="btn-export-cat" data-category="vector" role="tab" aria-selected="false">Vector &amp; Print (4)</button>
+                <button type="button" class="btn-export-cat" data-category="documents" role="tab" aria-selected="false">Documents (4)</button>
+                <button type="button" class="btn-export-cat" data-category="spreadsheets" role="tab" aria-selected="false">Spreadsheets (4)</button>
+                <button type="button" class="btn-export-cat" data-category="design" role="tab" aria-selected="false">Design &amp; Figma (2)</button>
+                <button type="button" class="btn-export-cat" data-category="project" role="tab" aria-selected="false">Project &amp; Data (3)</button>
+              </div>
+
+              <!-- Search Bar & Multi-Format Bundle Toggle -->
+              <div class="export-search-mode-row">
+                <input type="text" id="exportFormatSearch" class="export-search-input" placeholder="Search 20+ formats (e.g. PDF, SVG, Excel, DOCX, WebP)..." aria-label="Search export formats">
+                <button type="button" class="btn-toggle-bundle" id="btnToggleBundleMode" title="Toggle Multi-Format Bundle Export mode">
+                  <span>📦</span> Bundle Mode
+                </button>
+              </div>
+
+              <!-- Universal Format Catalogue Grid -->
+              <div class="export-field-group">
+                <label class="field-label" id="exportFormatLabel">1. Select Target Format</label>
+                <!-- Legacy format radio buttons for backward-compatibility & testing -->
+                <div class="legacy-format-radios" style="display:none;" aria-hidden="true">
+                  <button type="button" class="btn-export-format is-active" id="formatBtnPng" data-format="png" role="radio" aria-checked="true">PNG</button>
+                  <button type="button" class="btn-export-format" id="formatBtnJpeg" data-format="jpeg" role="radio" aria-checked="false">JPEG</button>
+                  <button type="button" class="btn-export-format" id="formatBtnSvg" data-format="svg" role="radio" aria-checked="false">SVG</button>
+                  <button type="button" class="btn-export-format" id="formatBtnWebp" data-format="webp" role="radio" aria-checked="false">WebP</button>
+                </div>
+                <div class="universal-format-grid" id="universalFormatGrid" role="region" aria-labelledby="exportFormatLabel">
+                  <!-- Cards rendered dynamically by editor-ui.js -->
+                </div>
+              </div>
+
+              <!-- Size Presets & Custom Dimensions -->
+              <div class="export-field-group" id="exportDimensionsGroup">
+                <label class="field-label" for="exportSizeSelect">2. Dimensions &amp; Resolution</label>
+                <select class="select-field" id="exportSizeSelect" title="Select Export Resolution">
+                  <option value="512" selected>512 × 512 px (Standard Web)</option>
+                  <option value="1024">1024 × 1024 px (High-Res 2x)</option>
+                  <option value="2048">2048 × 2048 px (Print 300 DPI)</option>
+                  <option value="custom">Custom Dimensions...</option>
+                </select>
+
+                <!-- Custom Dimensions Box (revealed when 'custom' is active) -->
+                <div class="custom-dimensions-card" id="customDimensionsCard" style="display: none;">
+                  <div class="custom-dims-row">
+                    <div class="dim-input-wrap">
+                      <label class="dim-label" for="exportCustomWidth">Width (px)</label>
+                      <input type="number" class="text-input dim-input" id="exportCustomWidth" min="64" max="4096" value="1024" step="1">
+                    </div>
+                    <div class="dim-multiply" aria-hidden="true">×</div>
+                    <div class="dim-input-wrap">
+                      <label class="dim-label" for="exportCustomHeight">Height (px)</label>
+                      <input type="number" class="text-input dim-input" id="exportCustomHeight" min="64" max="4096" value="1024" step="1">
+                    </div>
+                  </div>
+
+                  <div class="dim-toggles-row">
+                    <label class="checkbox-label" for="exportLockAspect">
+                      <input type="checkbox" id="exportLockAspect" checked>
+                      <span>Lock 1:1 Aspect Ratio</span>
+                    </label>
+
+                    <div class="dim-fit-wrap" id="dimFitWrap" style="display: none;">
+                      <label class="dim-fit-label" for="exportFitSelect">Non-Square Fit:</label>
+                      <select class="select-field select-field-sm" id="exportFitSelect">
+                        <option value="contain" selected>Contain (Preserve Content)</option>
+                        <option value="cover">Cover (Fill Canvas)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="dim-limits-hint">Safe bounds: 64px – 4096px &bull; Recommended: &ge;256px</div>
+                </div>
+
+                <!-- Dimension Warning Alert -->
+                <div class="export-dimension-warning" id="exportDimensionWarning" role="alert" style="display: none;">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span id="exportDimensionWarningText">Warning: Dimension under 256px may affect scanning reliability.</span>
+                </div>
+              </div>
+
+              <!-- Format-Specific Contextual Options Card -->
+              <div class="export-field-group">
+                <label class="field-label">3. Format Options</label>
+                
+                <!-- Image & Raster Options -->
+                <div class="format-options-card" id="formatOptionsRaster">
+                  <div id="wrapTransparentBg">
+                    <label class="checkbox-label" for="exportTransparentBg">
+                      <input type="checkbox" id="exportTransparentBg">
+                      <span>Transparent Background (omits canvas base &amp; quiet zone fill)</span>
+                    </label>
+                  </div>
+
+                  <div class="quality-slider-row" id="wrapQualitySlider" style="display: none;">
+                    <label class="quality-label" for="exportQualitySlider">
+                      Compression Quality: <strong id="exportQualityVal">90%</strong>
+                    </label>
+                    <input type="range" class="range-slider" id="exportQualitySlider" min="10" max="100" value="90" step="1">
+                  </div>
+
+                  <div class="webp-support-badge" id="browserSupportBadge" style="display: none;">
+                    <span class="status-indicator-dot" aria-hidden="true"></span>
+                    <span id="browserSupportText">Format supported by your browser</span>
+                  </div>
+
+                  <div class="format-notice-note" id="formatNoticeNote">
+                    Lossless raster with sharp module edges and quiet zone preservation.
+                  </div>
+                </div>
+
+                <!-- PDF & Print Options -->
+                <div class="format-options-card" id="formatOptionsPdf" style="display: none;">
+                  <div class="pdf-options-row">
+                    <div class="pdf-field-wrap">
+                      <label for="pdfPageSizeSelect">Page Size</label>
+                      <select class="select-field select-field-sm" id="pdfPageSizeSelect">
+                        <option value="letter" selected>Letter (8.5×11")</option>
+                        <option value="a4">A4 (210×297mm)</option>
+                      </select>
+                    </div>
+                    <div class="pdf-field-wrap">
+                      <label for="pdfOrientationSelect">Orientation</label>
+                      <select class="select-field select-field-sm" id="pdfOrientationSelect">
+                        <option value="portrait" selected>Portrait</option>
+                        <option value="landscape">Landscape</option>
+                      </select>
+                    </div>
+                    <div class="pdf-field-wrap">
+                      <label for="pdfLayoutSelect">Sheet Layout</label>
+                      <select class="select-field select-field-sm" id="pdfLayoutSelect">
+                        <option value="single" selected>Single Poster</option>
+                        <option value="grid2x2">4-Up Cut Sheet</option>
+                        <option value="grid3x3">9-Up Batch Grid</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="format-notice-note">
+                    Print-ready PDF 1.4 document with embedded high-resolution artwork, cut guides, and metadata.
+                  </div>
+                  <div style="margin-top: 10px;">
+                    <button type="button" class="btn-subaction" id="btnJumpToPrintStudioFromExport">
+                      🖨️ Open in Print Studio (Multi-Item &amp; Sticker Sheets)
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Spreadsheets Options Notice -->
+                <div class="format-options-card" id="formatOptionsSpreadsheet" style="display: none;">
+                  <div class="format-notice-note">
+                    <strong>Formula Injection Protection:</strong> All cells starting with =, +, -, @ are safely escaped. Includes UTF-8 BOM for Microsoft Excel.
+                  </div>
+                </div>
+
+                <!-- Design & Figma Options Notice -->
+                <div class="format-options-card" id="formatOptionsDesign" style="display: none;">
+                  <div class="format-notice-note">
+                    <strong>Complete Design Handoff:</strong> Includes vector SVG, 512/1024/2048px PNGs, W3C Design Tokens JSON, Spec JSON, and Figma import guide.
+                  </div>
+                </div>
+
+                <!-- Website Embed Snippet Box -->
+                <div class="format-options-card" id="formatOptionsEmbed" style="display: none;">
+                  <div class="embed-snippet-wrap">
+                    <label class="field-label" for="embedSnippetText">Copyable HTML5 Embed Code:</label>
+                    <textarea class="embed-textarea" id="embedSnippetText" readonly></textarea>
+                    <button type="button" class="btn-copy-embed" id="btnCopyEmbedSnippet">
+                      📋 Copy HTML Snippet
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Multi-Format Bundle Action Bar (shown in bundle mode) -->
+              <div class="bundle-action-bar" id="bundleActionBar" style="display: none;">
+                <div class="bundle-count-badge" id="bundleCountBadge">0 Formats Selected</div>
+                <button type="button" class="btn-export-bundle-main" id="btnExportBundleMain">
+                  Export Bundle (.ZIP)
+                </button>
+              </div>
+
+              <!-- Export Summary & Filename Card -->
+              <div class="export-summary-box" id="exportSummaryBox">
+                <div class="export-summary-row">
+                  <span class="summary-key">Target: <strong id="summaryFormatBadge">PNG</strong></span>
+                  <span class="summary-key">Dimensions: <strong id="summaryDimsBadge">512 × 512 px</strong></span>
+                </div>
+                <div class="export-filename-row">
+                  <span class="filename-tag">FILENAME</span>
+                  <span class="filename-str" id="summaryFilenameStr">qr-url-512x512.png</span>
+                </div>
+              </div>
+
+              <!-- Export Controls Row -->
+              <div class="export-controls-row">
+                <button type="button" class="btn-primary btn-export-main" id="exportBtn">
+                  <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.5;" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  <span id="exportBtnText">Export PNG (512 × 512)</span>
+                </button>
+
+                <button type="button" class="btn-secondary btn-export-backup" id="btnExportProjectFile" title="Export complete project backup file (.qrproject.json)">
+                  Backup .JSON
+                </button>
+
+                <button type="button" class="btn-reset-export" id="btnResetExportSettings" title="Reset export options to default settings">
+                  Reset
+                </button>
+              </div>
+            </div>
+
+            <div class="preview-guidance-note">
+              Standard ISO/IEC 18004 high-contrast QR code. Always test-scan with your intended devices before printing.
+            </div>
+          </aside>
+
+        </div>
+      </div>
+
+      <!-- V1.7 Dedicated Print & Layout Studio Console -->
+      <section class="workspace-console print-studio-console" id="printStudioSection" style="display: none;" aria-label="Print and Layout Studio">
+        <!-- Top Studio Ribbon -->
+        <div class="console-topbar">
+          <div class="console-left-group">
+            <div class="console-title">
+              <span class="console-dot" aria-hidden="true"></span>
+              <span class="console-title-text">PRINT &amp; LAYOUT STUDIO</span>
+              <span class="version-pill" style="margin-left: 8px;">v1.0.0</span>
+            </div>
+
+            <button type="button" class="btn-topbar-action" id="btnReturnToGenerator" title="Return to QR Code Generator">
+              <span aria-hidden="true">&larr;</span> QR Generator
+            </button>
+
+            <button type="button" class="btn-topbar-action btn-back-bulk" id="btnBackToBulkStudio" title="Return to Bulk Import &amp; Export Studio">
+              <span aria-hidden="true">&larr;</span> Bulk Studio
+            </button>
+          </div>
+
+          <!-- Status Meta Badges -->
+          <div class="console-meta">
+            <span class="console-tag tag-blue" id="printPageSizeBadge">A4 (210×297mm)</span>
+            <span class="console-tag tag-lime" id="printDpiBadge">300 DPI Press</span>
+            <span class="console-tag tag-orange" id="printItemsCountBadge">12 Items</span>
+            <div class="status-pill" title="100% Client-side. No assets or payloads leave your machine.">
+              <span class="status-indicator" aria-hidden="true"></span>
+              <span>100% Local</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="console-body">
+          <!-- Left Partition: Print Settings & Layout Controls -->
+          <section class="console-left-pane" aria-labelledby="printControlsHeading">
+            <div class="pane-header">
+              <div class="pane-title-group">
+                <h2 class="pane-title" id="printControlsHeading">
+                  <span class="section-num" aria-hidden="true">[01]</span>
+                  Print Layout Controls
+                </h2>
+                <span class="pane-hint">9 Templates &bull; Grids &bull; Precise mm Sizing</span>
+              </div>
+            </div>
+
+            <!-- Print Subtabs Navigation (4 tabs) -->
+            <nav class="print-subtabs-nav" aria-label="Print Studio settings subtabs">
+              <button type="button" class="print-subtab is-active" id="printSubtabTemplates" role="tab" aria-selected="true" aria-controls="printPanelTemplates">
+                1. Templates
+              </button>
+              <button type="button" class="print-subtab" id="printSubtabPage" role="tab" aria-selected="false" aria-controls="printPanelPage">
+                2. Page &amp; Sheet
+              </button>
+              <button type="button" class="print-subtab" id="printSubtabGrid" role="tab" aria-selected="false" aria-controls="printPanelGrid">
+                3. Grid &amp; Labels
+              </button>
+              <button type="button" class="print-subtab" id="printSubtabItems" role="tab" aria-selected="false" aria-controls="printPanelItems">
+                4. Items &amp; Content
+              </button>
+            </nav>
+
+            <!-- SUBPANEL 1: LAYOUT TEMPLATES -->
+            <div class="print-subpanel" id="printPanelTemplates" role="tabpanel" aria-labelledby="printSubtabTemplates">
+              <div class="form-group-title" style="margin-bottom: 10px;">
+                <span class="field-label">Choose a Professional Layout Preset:</span>
+                <span class="label-hint">Single card or multi-up sheets with instant configuration</span>
+              </div>
+              <div class="print-template-grid" id="printTemplateGrid">
+                <!-- 9 Template cards rendered dynamically by print-ui.js -->
+              </div>
+            </div>
+
+            <!-- SUBPANEL 2: PAGE & SHEET SETUP -->
+            <div class="print-subpanel" id="printPanelPage" role="tabpanel" aria-labelledby="printSubtabPage" hidden>
+              <!-- Page Size Preset -->
+              <div class="form-field-group">
+                <label class="field-label" for="printPageSizeSelect">Page Size</label>
+                <select class="select-field" id="printPageSizeSelect">
+                  <option value="a4" selected>A4 (210 × 297 mm)</option>
+                  <option value="a3">A3 (297 × 420 mm)</option>
+                  <option value="a5">A5 (148 × 210 mm)</option>
+                  <option value="letter">US Letter (8.5 × 11 in / 215.9 × 279.4 mm)</option>
+                  <option value="custom">Custom Page Dimensions...</option>
+                </select>
+              </div>
+
+              <!-- Custom Dimensions Row (shown when custom is selected) -->
+              <div class="print-dims-inputs-row" id="printCustomDimsRow" style="display: none;">
+                <div class="dim-input-wrap">
+                  <label class="dim-label" for="printCustomWidth">Width (mm)</label>
+                  <input type="number" class="text-input dim-input" id="printCustomWidth" min="20" max="1000" value="210" step="1">
+                </div>
+                <div class="dim-multiply" aria-hidden="true">×</div>
+                <div class="dim-input-wrap">
+                  <label class="dim-label" for="printCustomHeight">Height (mm)</label>
+                  <input type="number" class="text-input dim-input" id="printCustomHeight" min="20" max="1000" value="297" step="1">
+                </div>
+              </div>
+
+              <!-- Orientation -->
+              <div class="form-field-group" style="margin-top: 14px;">
+                <span class="field-label">Orientation</span>
+                <div class="style-toggle-group" id="printOrientationGroup" role="radiogroup" aria-label="Page orientation">
+                  <button type="button" class="style-toggle-btn is-active" data-orientation="portrait" role="radio" aria-checked="true">Portrait</button>
+                  <button type="button" class="style-toggle-btn" data-orientation="landscape" role="radio" aria-checked="false">Landscape</button>
+                </div>
+              </div>
+
+              <!-- Margins -->
+              <div class="form-field-group" style="margin-top: 14px;">
+                <div class="form-label-row">
+                  <span class="field-label">Page Margins (mm)</span>
+                  <span class="label-hint">Safe printable border distance</span>
+                </div>
+                <div class="print-margins-grid">
+                  <div class="margin-input-wrap">
+                    <label for="printMarginTop">Top</label>
+                    <input type="number" class="text-input text-input-sm" id="printMarginTop" min="0" max="100" value="12" step="1">
+                  </div>
+                  <div class="margin-input-wrap">
+                    <label for="printMarginBottom">Bottom</label>
+                    <input type="number" class="text-input text-input-sm" id="printMarginBottom" min="0" max="100" value="12" step="1">
+                  </div>
+                  <div class="margin-input-wrap">
+                    <label for="printMarginLeft">Left</label>
+                    <input type="number" class="text-input text-input-sm" id="printMarginLeft" min="0" max="100" value="12" step="1">
+                  </div>
+                  <div class="margin-input-wrap">
+                    <label for="printMarginRight">Right</label>
+                    <input type="number" class="text-input text-input-sm" id="printMarginRight" min="0" max="100" value="12" step="1">
+                  </div>
+                </div>
+                <div class="margin-preset-chips" aria-label="Margin presets">
+                  <button type="button" class="margin-preset-chip" data-margin="5">Narrow (5mm)</button>
+                  <button type="button" class="margin-preset-chip" data-margin="10">Normal (10mm)</button>
+                  <button type="button" class="margin-preset-chip" data-margin="15">Wide (15mm)</button>
+                  <button type="button" class="margin-preset-chip" data-margin="20">Large (20mm)</button>
+                </div>
+              </div>
+
+              <!-- Page Background Color -->
+              <div class="form-field-group" style="margin-top: 14px;">
+                <label class="field-label" for="printPageBgPicker">Paper / Background Color</label>
+                <div class="color-picker-input-group">
+                  <div class="color-swatch-wrapper" title="Choose page background color">
+                    <input type="color" id="printPageBgPicker" class="color-picker-native" value="#FFFFFF" aria-label="Page background color">
+                    <span class="color-swatch-display" id="printPageBgSwatch" style="background-color: #FFFFFF;" aria-hidden="true"></span>
+                  </div>
+                  <div class="hex-input-wrapper">
+                    <span class="hex-hash" aria-hidden="true">#</span>
+                    <input type="text" id="printPageBgHex" class="hex-text-input" value="FFFFFF" maxlength="6" aria-label="Page background hex code">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Guides and Marks Toggles -->
+              <div class="form-field-group" style="margin-top: 14px;">
+                <span class="field-label">Print Guides &amp; Marks</span>
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
+                  <label class="checkbox-label" for="printToggleCropMarks">
+                    <input type="checkbox" id="printToggleCropMarks" checked>
+                    <span>Corner Crop Marks (Standard trim guidelines)</span>
+                  </label>
+                  <label class="checkbox-label" for="printToggleCutLines">
+                    <input type="checkbox" id="printToggleCutLines" checked>
+                    <span>Dashed Grid Cut Lines (For sticker and label sheets)</span>
+                  </label>
+                  <label class="checkbox-label" for="printToggleMarginGuides">
+                    <input type="checkbox" id="printToggleMarginGuides" checked>
+                    <span>Printable-Area Safe Margin Outline (Preview only)</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- SUBPANEL 3: GRID & LABELS CONFIG -->
+            <div class="print-subpanel" id="printPanelGrid" role="tabpanel" aria-labelledby="printSubtabGrid" hidden>
+              <div class="grid-controls-card" id="printGridControlsCard">
+                <div class="form-label-row">
+                  <span class="field-label">Sticker &amp; Label Sheet Configuration</span>
+                  <button type="button" class="btn-subaction" id="btnAutoFitGrid" title="Auto-calculate label size to fit the printable area">
+                    ⚡ Auto-Fit to Page
+                  </button>
+                </div>
+
+                <div class="grid-dims-row" style="margin-top: 8px;">
+                  <div class="dim-input-wrap">
+                    <label for="printGridCols">Columns</label>
+                    <input type="number" class="text-input" id="printGridCols" min="1" max="8" value="3" step="1">
+                  </div>
+                  <div class="dim-input-wrap">
+                    <label for="printGridRows">Rows</label>
+                    <input type="number" class="text-input" id="printGridRows" min="1" max="10" value="4" step="1">
+                  </div>
+                </div>
+
+                <div class="grid-dims-row">
+                  <div class="dim-input-wrap">
+                    <label for="printGridLabelWidth">Label Width (mm)</label>
+                    <input type="number" class="text-input" id="printGridLabelWidth" min="10" max="300" value="55" step="1">
+                  </div>
+                  <div class="dim-input-wrap">
+                    <label for="printGridLabelHeight">Label Height (mm)</label>
+                    <input type="number" class="text-input" id="printGridLabelHeight" min="10" max="300" value="55" step="1">
+                  </div>
+                </div>
+
+                <div class="grid-dims-row">
+                  <div class="dim-input-wrap">
+                    <label for="printGridGapX">Horizontal Gap (mm)</label>
+                    <input type="number" class="text-input" id="printGridGapX" min="0" max="50" value="7" step="1">
+                  </div>
+                  <div class="dim-input-wrap">
+                    <label for="printGridGapY">Vertical Gap (mm)</label>
+                    <input type="number" class="text-input" id="printGridGapY" min="0" max="50" value="7" step="1">
+                  </div>
+                </div>
+
+                <!-- Label Shape -->
+                <div style="margin-top: 10px;">
+                  <span class="field-label">Label Shape &amp; Cut Guides</span>
+                  <div class="style-toggle-group" id="printGridShapeGroup" role="radiogroup" aria-label="Label cut shape" style="margin-top: 6px;">
+                    <button type="button" class="style-toggle-btn is-active" data-shape="rounded" role="radio" aria-checked="true">Rounded</button>
+                    <button type="button" class="style-toggle-btn" data-shape="circle" role="radio" aria-checked="false">Circle</button>
+                    <button type="button" class="style-toggle-btn" data-shape="square" role="radio" aria-checked="false">Square</button>
+                  </div>
+                </div>
+
+                <!-- Corner Radius Slider -->
+                <div class="range-control-row" style="margin-top: 10px;">
+                  <div class="range-label-group">
+                    <label for="printGridCornerRadius">Corner Radius</label>
+                    <span class="range-value-pill" id="printGridCornerRadiusVal">6 mm</span>
+                  </div>
+                  <input type="range" id="printGridCornerRadius" class="range-slider" min="0" max="25" step="1" value="6">
+                </div>
+
+                <!-- Repeat QR Toggle -->
+                <div style="margin-top: 12px;">
+                  <label class="checkbox-label" for="printGridRepeatQr">
+                    <input type="checkbox" id="printGridRepeatQr" checked>
+                    <span>Repeat current QR design across all labels on sheet</span>
+                  </label>
+                </div>
+
+                <!-- Calculation Summary -->
+                <div class="grid-summary-card" id="printGridSummaryText">
+                  Grid: <strong>179 × 241 mm</strong> &bull; Total Labels: <strong>12</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- SUBPANEL 4: ITEMS & CONTENT -->
+            <div class="print-subpanel" id="printPanelItems" role="tabpanel" aria-labelledby="printSubtabItems" hidden>
+              <div class="form-label-row">
+                <span class="field-label">Placed Items on Page</span>
+                <button type="button" class="btn-subaction" id="btnAddPrintItem">
+                  + Add Item
+                </button>
+              </div>
+
+              <!-- Alignment Toolbar -->
+              <div class="print-align-toolbar" role="toolbar" aria-label="Item Alignment & Distribution">
+                <button type="button" class="btn-print-align" data-action="align-left" title="Align Left">⇤ Left</button>
+                <button type="button" class="btn-print-align" data-action="align-center" title="Align Center">⇥ Center</button>
+                <button type="button" class="btn-print-align" data-action="align-right" title="Align Right">⇥ Right</button>
+                <button type="button" class="btn-print-align" data-action="align-top" title="Align Top">⤒ Top</button>
+                <button type="button" class="btn-print-align" data-action="align-middle" title="Align Middle">↕ Middle</button>
+                <button type="button" class="btn-print-align" data-action="align-bottom" title="Align Bottom">⤓ Bottom</button>
+                <button type="button" class="btn-print-align" data-action="distribute-h" title="Distribute Horizontally">⇹ Dist H</button>
+                <button type="button" class="btn-print-align" data-action="distribute-v" title="Distribute Vertically">⇳ Dist V</button>
+                <button type="button" class="btn-print-align" data-action="duplicate" title="Duplicate Selected Item">⧉ Clone</button>
+                <button type="button" class="btn-print-align" data-action="delete" title="Delete Selected Item" style="color: #CC0000;">✕ Delete</button>
+              </div>
+
+              <!-- Items List -->
+              <div class="print-items-list" id="printItemsListContainer">
+                <!-- Items list rendered dynamically -->
+              </div>
+
+              <!-- Selected Item Properties Card -->
+              <div class="custom-dimensions-card" id="printItemPropsCard" style="display: none;">
+                <div class="field-label" style="margin-bottom: 8px;">Selected Item Properties</div>
+
+                <!-- Position & Size -->
+                <div class="grid-dims-row">
+                  <div class="dim-input-wrap">
+                    <label for="printItemPosX">Position X (mm)</label>
+                    <input type="number" class="text-input" id="printItemPosX" min="0" max="800" value="15" step="1">
+                  </div>
+                  <div class="dim-input-wrap">
+                    <label for="printItemPosY">Position Y (mm)</label>
+                    <input type="number" class="text-input" id="printItemPosY" min="0" max="800" value="15" step="1">
+                  </div>
+                </div>
+
+                <div class="grid-dims-row">
+                  <div class="dim-input-wrap">
+                    <label for="printItemWidth">Width (mm)</label>
+                    <input type="number" class="text-input" id="printItemWidth" min="10" max="500" value="55" step="1">
+                  </div>
+                  <div class="dim-input-wrap">
+                    <label for="printItemHeight">Height (mm)</label>
+                    <input type="number" class="text-input" id="printItemHeight" min="10" max="500" value="55" step="1">
+                  </div>
+                </div>
+
+                <div class="form-field-group">
+                  <label class="field-label" for="printItemQrSize">QR Code Physical Size (mm)</label>
+                  <input type="number" class="text-input" id="printItemQrSize" min="5" max="300" value="38" step="1">
+                  <span class="label-hint">Recommended: &ge;20 mm (0.8 in) for standard smartphone camera scanning</span>
+                </div>
+
+                <!-- QR Source -->
+                <div class="form-field-group" style="margin-top: 10px;">
+                  <label class="field-label" for="printItemQrSourceSelect">QR Source / Design</label>
+                  <select class="select-field" id="printItemQrSourceSelect">
+                    <option value="current" selected>Current Workspace QR</option>
+                  </select>
+                </div>
+
+                <!-- Text Customization -->
+                <div class="form-field-group" style="margin-top: 10px;">
+                  <label class="field-label" for="printItemTitle">Header / Title</label>
+                  <input type="text" class="text-input" id="printItemTitle" value="Scan Me" maxlength="60">
+                </div>
+
+                <div class="form-field-group">
+                  <label class="field-label" for="printItemDesc">Description / Subtitle</label>
+                  <input type="text" class="text-input" id="printItemDesc" value="" maxlength="100">
+                </div>
+
+                <div class="form-field-group">
+                  <label class="field-label" for="printItemCta">CTA Button / Badge Text</label>
+                  <input type="text" class="text-input" id="printItemCta" value="" maxlength="40">
+                </div>
+
+                <!-- Element Visibility Checkboxes -->
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px;">
+                  <label class="checkbox-label" for="printItemShowTitle">
+                    <input type="checkbox" id="printItemShowTitle" checked>
+                    <span>Show Title</span>
+                  </label>
+                  <label class="checkbox-label" for="printItemShowDesc">
+                    <input type="checkbox" id="printItemShowDesc">
+                    <span>Show Description</span>
+                  </label>
+                  <label class="checkbox-label" for="printItemShowCta">
+                    <input type="checkbox" id="printItemShowCta">
+                    <span>Show CTA Badge</span>
+                  </label>
+                  <label class="checkbox-label" for="printItemShowCard">
+                    <input type="checkbox" id="printItemShowCard" checked>
+                    <span>Show Card Base Outline &amp; Background</span>
+                  </label>
+                </div>
+
+                <!-- Colors -->
+                <div class="design-styles-row" style="margin-top: 10px;">
+                  <div class="design-subgroup">
+                    <label class="design-sublabel" for="printItemCardBgPicker">Card Fill</label>
+                    <div class="color-picker-input-group">
+                      <div class="color-swatch-wrapper">
+                        <input type="color" id="printItemCardBgPicker" class="color-picker-native" value="#FFFFFF">
+                        <span class="color-swatch-display" id="printItemCardBgSwatch" style="background-color: #FFFFFF;"></span>
+                      </div>
+                      <div class="hex-input-wrapper">
+                        <span class="hex-hash">#</span>
+                        <input type="text" id="printItemCardBgHex" class="hex-text-input" value="FFFFFF" maxlength="6">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="design-subgroup">
+                    <label class="design-sublabel" for="printItemBorderPicker">Card Border</label>
+                    <div class="color-picker-input-group">
+                      <div class="color-swatch-wrapper">
+                        <input type="color" id="printItemBorderPicker" class="color-picker-native" value="#171717">
+                        <span class="color-swatch-display" id="printItemBorderSwatch" style="background-color: #171717;"></span>
+                      </div>
+                      <div class="hex-input-wrapper">
+                        <span class="hex-hash">#</span>
+                        <input type="text" id="printItemBorderHex" class="hex-text-input" value="171717" maxlength="6">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Real-Time Safety Advisory Banner -->
+            <div class="print-safety-banner" id="printSafetyBanner" role="alert">
+              <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.5; flex-shrink: 0;" aria-hidden="true">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+              <span id="printSafetyBannerText">Checking layout dimensions and printable margins...</span>
+            </div>
+          </section>
+
+          <!-- Right Partition: Live Interactive Zoomable Page Preview & Export Command Center -->
+          <aside class="console-right-pane" aria-labelledby="printStageHeading">
+            <!-- Stage Top Bar -->
+            <div class="print-stage-header">
+              <div class="print-stage-meta">
+                <span class="section-num-alt" id="printStageHeading" aria-hidden="true">[LIVE]</span>
+                <strong>PAGE PREVIEW</strong>
+                <span class="meta-badge" id="printStageDimsBadge">210.0 × 297.0 mm (8.27 × 11.69 in)</span>
+              </div>
+
+              <!-- Interactive Zoom Controls -->
+              <div class="print-zoom-toolbar" role="toolbar" aria-label="Page Preview Zoom Controls">
+                <button type="button" class="btn-print-zoom" id="btnZoomOut" title="Zoom out preview">-</button>
+                <span class="print-zoom-val" id="printZoomValDisplay">100%</span>
+                <button type="button" class="btn-print-zoom" id="btnZoomIn" title="Zoom in preview">+</button>
+                <button type="button" class="btn-print-zoom" id="btnZoomFit" title="Fit page preview into window">Fit</button>
+                <button type="button" class="btn-print-zoom" id="btnZoom100" title="100% actual scale">100%</button>
+              </div>
+            </div>
+
+            <!-- Stage Viewport (Interactive Drag & Canvas) -->
+            <div class="print-canvas-viewport" id="printCanvasViewport">
+              <canvas id="printPreviewCanvas" width="992" height="1403" aria-label="Live Print Page Preview"></canvas>
+            </div>
+
+            <!-- Print Studio Export Command Panel -->
+            <div class="print-export-panel">
+              <div class="form-label-row" style="margin-bottom: 10px;">
+                <span class="export-step-title">
+                  <span class="section-num" aria-hidden="true">[EXPORT]</span>
+                  Production Print Output
+                </span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <label for="printExportDpiSelect" style="font-family: var(--font-family-mono); font-size: 11px; font-weight: bold;">DPI:</label>
+                  <select class="select-field select-field-sm" id="printExportDpiSelect">
+                    <option value="300" selected>300 DPI (High-Definition Press)</option>
+                    <option value="150">150 DPI (Draft Proof)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Export Buttons Row -->
+              <div class="print-export-row">
+                <button type="button" class="btn-print-export-main" id="btnExportPrintPdf" title="Export genuine PDF 1.4 with crop marks and vector layout">
+                  📄 Export Print PDF
+                </button>
+                <button type="button" class="btn-print-export-sub" id="btnExportPrintSvg" title="Export standalone scalable vector graphic in mm">
+                  📐 Export Vector SVG
+                </button>
+                <button type="button" class="btn-print-export-sub" id="btnExportPrintPng" title="Export ultra high-resolution 300 DPI raster PNG">
+                  🖼️ Export 300 DPI PNG
+                </button>
+                <button type="button" class="btn-print-export-sub" id="btnExportPrintJpeg" title="Export solid photographic print JPEG">
+                  📷 Export JPEG
+                </button>
+                <button type="button" class="btn-print-export-sub" id="btnExportPrintJson" title="Backup complete print layout configuration to .qrprint.json">
+                  💾 Save Layout
+                </button>
+                <button type="button" class="btn-print-export-sub" id="btnImportPrintJson" title="Load a saved .qrprint.json layout file">
+                  📂 Load Layout
+                </button>
+                <button type="button" class="btn-print-export-sub" id="btnPrintDirect" title="Print directly using browser print dialog (Ctrl+P / Cmd+P)">
+                  🖨️ Direct Print
+                </button>
+              </div>
+
+              <!-- Hidden Layout File Picker -->
+              <input type="file" id="printLayoutFileInput" accept=".json,.qrprint,application/json" style="display: none;" aria-hidden="true">
+
+              <div class="format-notice-note" style="margin-top: 10px;">
+                <strong>Production Quality:</strong> Generates genuine PDF 1.4 with exact physical points (72pt/in), vector crop marks, and 1:1 QR aspect ratio. Processed 100% locally with zero server requests.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- V1.8 Dedicated Bulk Import, Generation, Export & Print Studio Console -->
+      <section class="workspace-console bulk-studio-console" id="bulkStudioSection" style="display: none;" aria-label="Bulk Import and Export Studio">
+        <!-- Top Studio Ribbon -->
+        <div class="console-topbar">
+          <div class="console-left-group">
+            <div class="console-title">
+              <span class="console-dot" aria-hidden="true"></span>
+              <span class="console-title-text">BULK STUDIO</span>
+              <span class="version-pill" style="margin-left: 8px;">v1.0.0</span>
+            </div>
+
+            <button type="button" class="btn-topbar-action" id="btnReturnFromBulk" title="Return to QR Code Generator">
+              <span aria-hidden="true">&larr;</span> QR Generator
+            </button>
+          </div>
+
+          <!-- Status Meta Badges -->
+          <div class="console-meta">
+            <span class="console-tag tag-blue" id="bulkTotalRowsBadge">0 Rows</span>
+            <span class="console-tag tag-lime" id="bulkValidBadge">0 Valid</span>
+            <span class="console-tag tag-orange" id="bulkReadyBadge">0 Ready</span>
+            <div class="status-pill" title="100% Client-side. No spreadsheets, payloads, or assets leave your machine.">
+              <span class="status-indicator" aria-hidden="true"></span>
+              <span>100% Local</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4-Step Interactive Workflow Navigation -->
+        <div class="bulk-steps-nav" role="tablist" aria-label="Bulk Studio Workflow Steps">
+          <button type="button" class="bulk-step-item is-active" data-step="1" role="tab" aria-selected="true" id="bulkTabStep1">
+            <span class="step-num">[01]</span>
+            <span class="step-label">Import &amp; Paste Data</span>
+          </button>
+          <button type="button" class="bulk-step-item" data-step="2" role="tab" aria-selected="false" id="bulkTabStep2">
+            <span class="step-num">[02]</span>
+            <span class="step-label">Mapping &amp; Preview</span>
+          </button>
+          <button type="button" class="bulk-step-item" data-step="3" role="tab" aria-selected="false" id="bulkTabStep3">
+            <span class="step-num">[03]</span>
+            <span class="step-label">Batch Generation</span>
+          </button>
+          <button type="button" class="bulk-step-item" data-step="4" role="tab" aria-selected="false" id="bulkTabStep4">
+            <span class="step-num">[04]</span>
+            <span class="step-label">Bulk Export &amp; Print</span>
+          </button>
+        </div>
+
+        <div class="bulk-body">
+          <!-- STEP 1: Import & Paste Data -->
+          <div class="bulk-step-panel" data-step-panel="1" id="bulkStepPanel1">
+            <div class="bulk-grid-2col">
+              <!-- Dropzone & File Upload Card -->
+              <div class="bulk-card">
+                <div class="card-header">
+                  <h3 class="card-title">📁 Upload Spreadsheet or Text File</h3>
+                  <span class="card-hint">Supports CSV, TSV, TXT, and XLSX files</span>
+                </div>
+                <div class="bulk-dropzone" id="bulkDropzone" tabindex="0" role="button" aria-label="Upload file drop zone">
+                  <div class="dropzone-icon">📥</div>
+                  <h4 class="dropzone-title">Drag &amp; Drop spreadsheet file here</h4>
+                  <p class="dropzone-desc">or click below to browse from your computer</p>
+                  <button type="button" class="btn-bulk-browse" id="btnBulkBrowseFiles">Browse Files</button>
+                  <input type="file" id="bulkFileInput" accept=".csv,.tsv,.txt,.xlsx,text/csv,text/tab-separated-values,text/plain,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display: none;" aria-hidden="true">
+                  <div class="dropzone-badges">
+                    <span class="format-chip">.CSV (RFC 4180)</span>
+                    <span class="format-chip">.TSV</span>
+                    <span class="format-chip">.TXT</span>
+                    <span class="format-chip">.XLSX (Excel)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pasted Text Card -->
+              <div class="bulk-card">
+                <div class="card-header">
+                  <h3 class="card-title">📋 Paste Spreadsheet Rows or CSV</h3>
+                  <span class="card-hint">Copy directly from Excel, Google Sheets, or Numbers</span>
+                </div>
+                <div class="bulk-paste-box">
+                  <textarea class="bulk-textarea" id="bulkPasteTextarea" rows="8" aria-label="Paste spreadsheet rows or CSV data" placeholder="Website / Data,Type,Name&#10;https://example.com,url,Visit Website&#10;+919876543210,phone,Call Us&#10;hello@example.com,email,Contact Us&#10;Welcome to our cafe,text,Welcome"></textarea>
+                  <div class="bulk-paste-actions">
+                    <button type="button" class="btn-bulk-primary" id="btnBulkParsePaste">⚡ Parse Pasted Data</button>
+                    <button type="button" class="btn-bulk-secondary" id="btnBulkClearPaste">Clear</button>
+                  </div>
+                </div>
+
+                <!-- 1-Click Sample Datasets -->
+                <div class="bulk-samples-group">
+                  <span class="samples-title">Try Quick Samples:</span>
+                  <div class="samples-chips">
+                    <button type="button" class="btn-sample-chip" id="btnBulkSampleMixed">Mixed QR Data</button>
+                    <button type="button" class="btn-sample-chip" id="btnBulkSampleInstructions">Sheet Instructions Row</button>
+                    <button type="button" class="btn-sample-chip" id="btnBulkSampleRetail">Retail Inventory</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Import Status Alert Banner -->
+            <div class="bulk-alert-banner alert-info" id="bulkImportAlert" style="display: none;" role="status"></div>
+          </div>
+
+          <!-- STEP 2: Column Mapping & Preview -->
+          <div class="bulk-step-panel" data-step-panel="2" id="bulkStepPanel2" style="display: none;">
+            <!-- Confidence & Mapping Status Banner -->
+            <div class="bulk-alert-banner alert-info" id="bulkMappingAlert" role="status"></div>
+
+            <!-- Action Toolbar -->
+            <div class="bulk-table-toolbar">
+              <div class="toolbar-left">
+                <button type="button" class="btn-bulk-tool" id="btnBulkSelectAllRows">Select All</button>
+                <button type="button" class="btn-bulk-tool" id="btnBulkDeselectAllRows">Deselect All</button>
+                <button type="button" class="btn-bulk-tool" id="btnBulkAddManualRow">+ Add Record</button>
+              </div>
+              <div class="toolbar-right">
+                <button type="button" class="btn-bulk-primary" id="btnBulkProceedToGenerate">Proceed to Generation &rarr;</button>
+              </div>
+            </div>
+
+            <!-- Spreadsheet-style Interactive Table Container -->
+            <div class="bulk-table-container" id="bulkTableContainer">
+              <table class="bulk-table" id="bulkPreviewTable">
+                <thead id="bulkTableHead">
+                  <!-- Injected dynamically by BulkUI -->
+                </thead>
+                <tbody id="bulkTableBody">
+                  <!-- Injected dynamically by BulkUI -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- STEP 3: Batch Generation -->
+          <div class="bulk-step-panel" data-step-panel="3" id="bulkStepPanel3" style="display: none;">
+            <div class="bulk-card bulk-generate-card">
+              <div class="card-header">
+                <h3 class="card-title">⚡ Configure &amp; Generate QR Batch</h3>
+                <span class="card-hint">Preserves 1:1 aspect ratio, quiet zones, and colors</span>
+              </div>
+
+              <div class="bulk-config-grid">
+                <div class="form-group">
+                  <label for="bulkTemplateSelect" class="form-label">QR Design Preset / Style:</label>
+                  <select id="bulkTemplateSelect" class="form-select bulk-select">
+                    <!-- Injected dynamically -->
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="bulkEclSelect" class="form-label">Error Correction Level (ECL):</label>
+                  <select id="bulkEclSelect" class="form-select bulk-select">
+                    <option value="M" selected>Level M — 15% Recovery (Recommended)</option>
+                    <option value="L">Level L — 7% Recovery (Compact Modules)</option>
+                    <option value="Q">Level Q — 25% Recovery (High Durability)</option>
+                    <option value="H">Level H — 30% Recovery (Maximum Print Safety)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="bulk-generate-actions">
+                <button type="button" class="btn-bulk-primary btn-large" id="btnBulkStartGeneration">⚡ Generate QR Codes</button>
+                <button type="button" class="btn-bulk-secondary" id="btnBulkCancelGeneration" style="display: none;">Cancel</button>
+                <button type="button" class="btn-bulk-tool" id="btnBulkRetryFailed" style="display: none;">Retry Failed</button>
+              </div>
+
+              <!-- Live Progress Bar -->
+              <div class="bulk-progress-container" id="bulkProgressContainer" style="display: none;">
+                <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Bulk QR generation progress">
+                  <div class="progress-fill" id="bulkProgressBar" style="width: 0%;"></div>
+                </div>
+                <div class="progress-label" id="bulkProgressLabel" aria-live="polite">Preparing generation...</div>
+              </div>
+
+              <div class="bulk-generation-stats" id="bulkGenerationStats"></div>
+            </div>
+          </div>
+
+          <!-- STEP 4: Bulk Export & Print Studio Integration -->
+          <div class="bulk-step-panel" data-step-panel="4" id="bulkStepPanel4" style="display: none;">
+            <div class="bulk-grid-export">
+              <!-- Left: Generated Cards Gallery -->
+              <div class="bulk-card bulk-gallery-card">
+                <div class="card-header">
+                  <h3 class="card-title">🖼️ Generated QR Cards</h3>
+                  <span class="card-hint">High-fidelity scannable previews</span>
+                </div>
+                <div class="bulk-cards-grid" id="bulkCardsGrid">
+                  <!-- Injected dynamically -->
+                </div>
+              </div>
+
+              <!-- Right: Export & Print Actions -->
+              <div class="bulk-card bulk-export-actions-card">
+                <div class="card-header">
+                  <h3 class="card-title">📦 Bulk Export &amp; Print</h3>
+                  <span class="card-hint">Save ZIP archive or send to Print Studio</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="bulkExportFormatSelect" class="form-label">Image Format for ZIP:</label>
+                  <select id="bulkExportFormatSelect" class="form-select bulk-select">
+                    <option value="png" selected>PNG (Lossless Raster, Razor Sharp)</option>
+                    <option value="jpeg">JPEG (High-Quality Photographic)</option>
+                    <option value="webp">WebP (Modern Compact Raster)</option>
+                    <option value="svg">SVG (Clean Scalable Vector Paths)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="bulkExportManifestSelect" class="form-label">Manifest Metadata Format:</label>
+                  <select id="bulkExportManifestSelect" class="form-select bulk-select">
+                    <option value="csv" selected>CSV (RFC 4180 with Formula Defense)</option>
+                    <option value="tsv">TSV (Tab-Separated)</option>
+                    <option value="json">JSON Metadata</option>
+                    <option value="xlsx">XLSX (Microsoft Excel Open XML)</option>
+                    <option value="all">All Manifest Formats</option>
+                  </select>
+                </div>
+
+                <div class="bulk-export-btn-group">
+                  <button type="button" class="btn-bulk-primary btn-full" id="btnBulkDownloadZip">
+                    📦 Download Bulk ZIP Archive
+                  </button>
+                  <button type="button" class="btn-bulk-secondary btn-full" id="btnBulkExportManifestOnly">
+                    📄 Export Manifest Only
+                  </button>
+                  <button type="button" class="btn-bulk-print btn-full" id="btnBulkSendToPrintStudio">
+                    🖨️ Send Selected to Print Studio &rarr;
+                  </button>
+                </div>
+
+                <div class="format-notice-note" style="margin-top: 15px;">
+                  <strong>100% Offline &amp; Safe:</strong> All ZIP compression, manifests, and image rendering are performed in-memory on your machine. Spreadsheet manifests are strictly protected against CSV formula injection (CWE-1236).
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-inner">
+        <div>
+          <span class="footer-tag">BETTER QR</span>
+          <strong>Better QR &bull; Make Every Scan Better.</strong> Free &amp; Open Source (MIT License). Runs 100% locally in your browser.
+        </div>
+        <ul class="footer-links">
+          <li><span>Standard: ISO/IEC 18004</span></li>
+          <li><span>Privacy: Zero Network Telemetry</span></li>
+        </ul>
+      </div>
+    </footer>
+
+    <!-- V1.3 Design Variations Comparison Modal -->
+    <div class="variations-modal-backdrop" id="variationsModalBackdrop" style="display: none;" aria-hidden="true">
+      <div class="variations-modal" id="variationsModal" role="dialog" aria-modal="true" aria-labelledby="variationsTitle">
+        <div class="variations-modal-header">
+          <div class="variations-title-group">
+            <span class="variations-modal-tag" aria-hidden="true">[VARIATION LAB]</span>
+            <h3 class="variations-modal-title" id="variationsTitle">4 Distinct Design Explorations</h3>
+            <span class="variations-modal-hint">Rendered with your live payload &bull; Guaranteed high contrast &amp; quiet zone</span>
+          </div>
+          <div class="variations-header-actions">
+            <button type="button" class="btn-modal-action" id="btnReturnOriginal" title="Return to current design without applying changes">
+              <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5;" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
+              Keep Original
+            </button>
+            <button type="button" class="btn-modal-close" id="btnCloseVariations" aria-label="Close variations modal">
+              &times;
+            </button>
+          </div>
+        </div>
+
+        <div class="variations-modal-body">
+          <div class="variations-grid" id="variationsGrid">
+            <!-- 4 Variation Cards injected dynamically by editor-ui.js -->
+          </div>
+        </div>
+
+        <div class="variations-modal-footer">
+          <div class="variations-footer-note">
+            <svg viewBox="0 0 24 24" class="notice-icon" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>Click <strong>Apply This Variation</strong> on any card to update your workspace. Locked properties were preserved.</span>
+          </div>
+          <button type="button" class="btn-subaction" id="btnRerollVariations">
+            🎲 Re-roll 4 Variations
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- V1.4 Project Manager Modal -->
+    <div class="project-modal-backdrop" id="projectManagerModal" role="dialog" aria-modal="true" aria-labelledby="projectManagerTitle" style="display: none;">
+      <div class="project-modal">
+        <div class="project-modal-header">
+          <div class="project-title-group">
+            <span class="project-modal-tag">LOCAL BROWSER PROJECTS</span>
+            <h3 class="project-modal-title" id="projectManagerTitle">Project Manager</h3>
+            <span class="project-modal-hint">Switch, rename, duplicate, or create named QR projects. Saved locally in your browser.</span>
+          </div>
+          <button type="button" class="btn-modal-close" id="btnCloseProjectManager" aria-label="Close Project Manager">
+            &times;
+          </button>
+        </div>
+
+        <div class="project-modal-toolbar">
+          <div class="project-toolbar-actions">
+            <button type="button" class="btn-cta-project" id="btnModalCreateProject">
+              <span aria-hidden="true">＋</span> Create New Project
+            </button>
+            <button type="button" class="btn-cta-project btn-cta-import" id="btnModalImportProject" title="Import a project backup from a local JSON file">
+              <span aria-hidden="true">⤒</span> Import Project
+            </button>
+          </div>
+          <div class="project-count-badge" id="projectCountBadge">
+            1 Project
+          </div>
+        </div>
+
+        <div class="project-modal-body">
+          <div class="project-list-grid" id="projectListGrid">
+            <!-- Project Cards rendered dynamically by editor-ui.js -->
+          </div>
+        </div>
+
+        <div class="project-modal-footer">
+          <div class="project-footer-note">
+            <svg viewBox="0 0 24 24" class="notice-icon" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>Projects are stored in your browser's local storage on this computer. Browser storage can be cleared if browsing history or site data is wiped; export your QR PNGs to keep permanent copies.</span>
+          </div>
+          <button type="button" class="btn-modal-action" id="btnCloseProjectManagerFooter">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden Project File Picker Input -->
+    <input type="file" id="projectFileInput" accept=".json,.qrproject,.qrdesign,application/json" style="display: none;" aria-hidden="true">
+
+    <!-- V1.5 Project Import Preview & Confirmation Modal -->
+    <div class="project-modal-backdrop" id="importPreviewModal" role="dialog" aria-modal="true" aria-labelledby="importPreviewTitle" style="display: none;">
+      <div class="project-modal import-modal-box">
+        <div class="project-modal-header">
+          <div class="project-title-group">
+            <span class="project-modal-tag">PROJECT BACKUP &amp; IMPORT</span>
+            <h3 class="project-modal-title" id="importPreviewTitle">Import Project</h3>
+            <span class="project-modal-hint">Review package manifest, payload, and design before applying to workspace.</span>
+          </div>
+          <button type="button" class="btn-modal-close" id="btnCloseImportPreview" aria-label="Close Import Modal">
+            &times;
+          </button>
+        </div>
+
+        <div class="project-modal-body import-modal-body">
+          <!-- Duplicate Name / Storage Alert Banner -->
+          <div class="import-alert-banner" id="importAlertBanner" style="display: none;">
+            <span class="import-alert-icon" aria-hidden="true">⚠️</span>
+            <span id="importAlertText">A project with this name already exists in local storage.</span>
+          </div>
+
+          <!-- Project Summary Card -->
+          <div class="import-preview-card">
+            <div class="import-card-header">
+              <div class="import-name-group">
+                <label for="importProjectNameInput" class="import-label">Project Name</label>
+                <input type="text" id="importProjectNameInput" class="text-input import-name-input" maxlength="100" autocomplete="off">
+              </div>
+              <div class="import-schema-badge" id="importSchemaBadge">Schema v2</div>
+            </div>
+
+            <div class="import-details-grid">
+              <!-- QR Payload Block -->
+              <div class="import-detail-block">
+                <span class="import-block-label">QR Payload</span>
+                <div class="import-payload-row">
+                  <span class="import-type-badge" id="importTypeBadge">URL</span>
+                  <span class="import-payload-text" id="importPayloadText">https://example.com</span>
+                </div>
+                <div class="import-meta-sub" id="importPayloadMeta">ECL: M (15%) • Size: 512 × 512 px</div>
+              </div>
+
+              <!-- Visual Design Block -->
+              <div class="import-detail-block">
+                <span class="import-block-label">Design &amp; Colors</span>
+                <div class="import-swatches-row">
+                  <div class="import-swatch-box" id="importDarkSwatch" title="Dark / Module Color"></div>
+                  <div class="import-swatch-box" id="importLightSwatch" title="Light / Background Color"></div>
+                  <span class="import-style-desc" id="importStyleDesc">Square modules • Square finders</span>
+                </div>
+                <div class="import-meta-sub" id="importFrameDesc">Frame: None</div>
+              </div>
+
+              <!-- Embedded Assets Block -->
+              <div class="import-detail-block">
+                <span class="import-block-label">Embedded Assets</span>
+                <div class="import-assets-row" id="importAssetsRow">
+                  <span class="import-asset-item">Logo: None</span>
+                  <span class="import-asset-item">Background: None</span>
+                </div>
+              </div>
+
+              <!-- Package Meta Block -->
+              <div class="import-detail-block">
+                <span class="import-block-label">Package Manifest</span>
+                <div class="import-meta-text" id="importMetaText">Format: qr-design-studio-project • Exported: Today</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-modal-footer import-modal-footer">
+          <div class="import-footer-left">
+            <button type="button" class="btn-import-cancel" id="btnCancelImport">Cancel</button>
+          </div>
+          <div class="import-footer-right">
+            <button type="button" class="btn-import-replace" id="btnImportReplace" title="Overwrite current open project with this imported project">
+              Replace Current Project
+            </button>
+            <button type="button" class="btn-import-new" id="btnImportAsNew" title="Import as a new separate project in local storage">
+              Import as New Project
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- In-App Create New Project Modal -->
+    <div class="project-modal-backdrop" id="createProjectModal" role="dialog" aria-modal="true" aria-labelledby="createProjectTitle" style="display: none;">
+      <div class="project-modal create-project-modal-box">
+        <div class="project-modal-header">
+          <div class="project-modal-title-group">
+            <span class="project-modal-tag">NEW PROJECT</span>
+            <h3 class="project-modal-title" id="createProjectTitle">Create New Project</h3>
+            <span class="project-modal-hint">Give your QR project a name to get started.</span>
+          </div>
+          <button type="button" class="btn-modal-close" id="btnCloseCreateProjectModal" aria-label="Close Create Project Modal">✕</button>
+        </div>
+        <form id="createProjectForm" onsubmit="return false;" novalidate>
+          <div class="project-modal-body">
+            <div class="form-group">
+              <label for="newProjectNameInput" class="form-label">Project Name</label>
+              <input type="text" id="newProjectNameInput" class="form-input" maxlength="60" required placeholder="e.g. Summer Campaign" autocomplete="off">
+              <div class="form-inline-error" id="newProjectNameError" role="alert" style="display: none;"></div>
+            </div>
+          </div>
+          <div class="project-modal-footer">
+            <button type="button" class="btn-modal-action" id="btnCancelCreateProject">Cancel</button>
+            <button type="submit" class="btn-cta-project" id="btnSubmitCreateProject">Create Project</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- In-App Rename Project Modal -->
+    <div class="project-modal-backdrop" id="renameProjectModal" role="dialog" aria-modal="true" aria-labelledby="renameProjectTitle" style="display: none;">
+      <div class="project-modal rename-project-modal-box">
+        <div class="project-modal-header">
+          <div class="project-modal-title-group">
+            <span class="project-modal-tag">RENAME PROJECT</span>
+            <h3 class="project-modal-title" id="renameProjectTitle">Rename Project</h3>
+            <span class="project-modal-hint">Update the project name in local browser storage.</span>
+          </div>
+          <button type="button" class="btn-modal-close" id="btnCloseRenameProjectModal" aria-label="Close Rename Project Modal">✕</button>
+        </div>
+        <form id="renameProjectForm" onsubmit="return false;" novalidate>
+          <div class="project-modal-body">
+            <div class="form-group">
+              <label for="renameProjectNameInput" class="form-label">New Project Name</label>
+              <input type="text" id="renameProjectNameInput" class="form-input" maxlength="60" required placeholder="Project Name" autocomplete="off">
+              <div class="form-inline-error" id="renameProjectNameError" role="alert" style="display: none;"></div>
+            </div>
+          </div>
+          <div class="project-modal-footer">
+            <button type="button" class="btn-modal-action" id="btnCancelRenameProject">Cancel</button>
+            <button type="submit" class="btn-cta-project" id="btnSubmitRenameProject">Save Name</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- V1.4 Accessible Confirmation Dialog -->
+    <div class="confirm-modal-backdrop" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" style="display: none;">
+      <div class="confirm-modal-box">
+        <div class="confirm-modal-header">
+          <span class="confirm-modal-tag" id="confirmTag">CONFIRM ACTION</span>
+          <h4 class="confirm-modal-title" id="confirmTitle">Are you sure?</h4>
+        </div>
+        <div class="confirm-modal-body">
+          <p id="confirmMessage">This action cannot be undone.</p>
+        </div>
+        <div class="confirm-modal-actions">
+          <button type="button" class="btn-confirm-cancel" id="btnConfirmCancel">Cancel</button>
+          <button type="button" class="btn-confirm-proceed" id="btnConfirmProceed">Proceed</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback Toast -->
+    <div class="feedback-toast" id="feedbackToast" role="status" aria-live="polite">
+      <span id="toastMsg"></span>
+    </div>
+
+  </div>
+
+  <!-- Local Script Dependencies in Strict Execution Order (No ES modules for file:// compatibility) -->
+  <script src="vendor/qrcode.js"></script>
+  <script src="js/qr/qr-engine.js"></script>
+  <script src="js/validation/payload-validators.js"></script>
+  <script src="js/design/color-utils.js"></script>
+  <script src="js/templates/template-registry.js"></script>
+  <script src="js/storage/project-package.js"></script>
+  <script src="js/storage/project-manager.js"></script>
+  <script src="js/history/history-manager.js"></script>
+  <script src="js/export/zip-builder.js"></script>
+  <script src="js/export/image-encoders.js"></script>
+  <script src="js/export/vector-encoders.js"></script>
+  <script src="js/export/document-encoders.js"></script>
+  <script src="js/export/spreadsheet-encoders.js"></script>
+  <script src="js/export/export-studio.js"></script>
+  <script src="js/export/png-exporter.js"></script>
+  <script src="js/print/print-engine.js"></script>
+  <script src="js/ui/print-ui.js"></script>
+  <script src="js/bulk/bulk-engine.js"></script>
+  <script src="js/ui/bulk-ui.js"></script>
+  <script src="js/ui/editor-ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

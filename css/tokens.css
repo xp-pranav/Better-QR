@@ -1,0 +1,131 @@
+/**
+ * QR Design Studio — Neo-Brutalist Design Tokens
+ * Bold high-contrast color system, hard offset shadows, thick borders
+ */
+
+:root {
+  /* Core Neo-Brutalist Palette */
+  --color-lime: #D7FF38;        /* Electric lime */
+  --color-pink: #FF4FA3;        /* Hot pink */
+  --color-blue: #4D5BFF;        /* Electric blue */
+  --color-orange: #FF7838;      /* Tangerine orange */
+  --color-cream: #FFF9ED;       /* Paper cream canvas */
+  --color-black: #171717;       /* Rich ink black */
+  --color-white: #FFFFFF;       /* Crisp white surface */
+
+  /* Semantic UI Tokens */
+  --color-canvas: var(--color-cream);
+  --color-surface: var(--color-white);
+  --color-surface-alt: #FFF4DC;
+  --color-surface-dark: var(--color-black);
+
+  --color-ink: var(--color-black);
+  --color-ink-muted: #424242;
+  --color-ink-subtle: #666666;
+  --color-ink-inverse: var(--color-white);
+
+  /* Primary & Accent Roles */
+  --color-accent-primary: var(--color-lime);
+  --color-accent-secondary: var(--color-pink);
+  --color-accent-tertiary: var(--color-blue);
+  --color-accent-warning: var(--color-orange);
+  --color-accent-lime: var(--color-lime);
+  --color-accent-blue: var(--color-blue);
+  --color-accent-pink: var(--color-pink);
+  --color-accent-orange: var(--color-orange);
+
+  /* Status Colors with High Neo-Brutalist Contrast */
+  --color-danger: #FF2B44;
+  --color-danger-surface: #FFE8EC;
+  --color-danger-ink: #8F0013;
+
+  --color-success: #00BF63;
+  --color-success-surface: #E6FAEF;
+  --color-success-ink: #005A2E;
+
+  --color-warning-surface: #FFF1DB;
+  --color-warning-border: var(--color-black);
+  --color-warning-ink: var(--color-black);
+
+  /* Borders & Outlines */
+  --border-width-sm: 2px;
+  --border-width: 2.5px;
+  --border-width-lg: 3px;
+  --border-color: var(--color-black);
+  --border-main: var(--border-width) solid var(--color-black);
+  --border-thick: var(--border-width-lg) solid var(--color-black);
+  --border-thin: var(--border-width-sm) solid var(--color-black);
+  --border-medium: var(--border-width) solid var(--color-black);
+
+  /* Hard Offset Neo-Brutalist Shadows */
+  --shadow-xs: 2px 2px 0 var(--color-black);
+  --shadow-sm: 2px 2px 0 var(--color-black);
+  --shadow-md: 4px 4px 0 var(--color-black);
+  --shadow-lg: 6px 6px 0 var(--color-black);
+  --shadow-xl: 8px 8px 0 var(--color-black);
+  --shadow-interactive: 4px 4px 0 var(--color-black);
+  --shadow-interactive-hover: 6px 6px 0 var(--color-black);
+  --shadow-interactive-active: 1px 1px 0 var(--color-black);
+
+  /* Minimal / Square Brutalist Radii */
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-pill: 9999px;
+
+  /* Typography */
+  --font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-family-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-family-mono: "SF Mono", "Cascadia Code", "Courier New", Courier, monospace;
+
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-md: 1.125rem;   /* 18px */
+  --font-size-lg: 1.375rem;   /* 22px */
+  --font-size-xl: 1.75rem;    /* 28px */
+  --font-size-2xl: 2.25rem;   /* 36px */
+  --font-size-hero: 3rem;     /* 48px */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 600;
+  --font-weight-bold: 800;
+  --font-weight-black: 900;
+
+  --line-height-tight: 1.1;
+  --line-height-heading: 1.2;
+  --line-height-normal: 1.5;
+
+  /* Spacing Scale */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+
+  /* Micro-interaction Transitions & Motion System */
+  --transition-fast: 120ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-base: 160ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-smooth: 220ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-accordion: 240ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-modal: 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: 160ms cubic-bezier(0.18, 0.89, 0.32, 1.28);
+
+  /* Layering & Z-Index Scale */
+  --z-base: 1;
+  --z-sticky: 100;
+  --z-header: 150;
+  --z-dropdown: 200;
+  --z-modal-backdrop: 1000;
+  --z-modal: 1010;
+  --z-toast: 2000;
+
+  /* Touch & Accessibility Tokens */
+  --touch-target-min: 44px;
+}
+

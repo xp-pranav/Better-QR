@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Sharp Neo-Brutalist Shadow -->
+    <filter id="brutalistShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="16" dy="16" stdDeviation="0" flood-color="#111111" flood-opacity="1" />
+    </filter>
+  </defs>
+
+  <!-- Neo-Brutalist Rounded Canvas Plate -->
+  <rect x="24" y="24" width="448" height="448" rx="56" fill="#FFE600" stroke="#111111" stroke-width="28" filter="url(#brutalistShadow)" />
+
+  <!-- Top-Left Finder Pattern -->
+  <rect x="76" y="76" width="128" height="128" rx="20" fill="#111111" />
+  <rect x="100" y="100" width="80" height="80" rx="10" fill="#FFE600" />
+  <rect x="118" y="118" width="44" height="44" rx="6" fill="#111111" />
+
+  <!-- Top-Right Finder Pattern -->
+  <rect x="292" y="76" width="128" height="128" rx="20" fill="#111111" />
+  <rect x="316" y="100" width="80" height="80" rx="10" fill="#FFE600" />
+  <rect x="334" y="118" width="44" height="44" rx="6" fill="#111111" />
+
+  <!-- Bottom-Left Finder Pattern -->
+  <rect x="76" y="292" width="128" height="128" rx="20" fill="#111111" />
+  <rect x="100" y="316" width="80" height="80" rx="10" fill="#FFE600" />
+  <rect x="118" y="334" width="44" height="44" rx="6" fill="#111111" />
+
+  <!-- Center Alignment & Timing Modules -->
+  <rect x="236" y="76" width="28" height="28" rx="4" fill="#111111" />
+  <rect x="236" y="126" width="28" height="28" rx="4" fill="#111111" />
+  <rect x="236" y="176" width="28" height="28" rx="4" fill="#111111" />
+  <rect x="76" y="236" width="28" height="28" rx="4" fill="#111111" />
+  <rect x="126" y="236" width="28" height="28" rx="4" fill="#111111" />
+  <rect x="176" y="236" width="28" height="28" rx="4" fill="#111111" />
+
+  <!-- Center Feature: Neo-Brutalist 'B' Core Module -->
+  <rect x="228" y="228" width="56" height="56" rx="8" fill="#111111" />
+
+  <!-- Bottom-Right Dynamic Data Cluster -->
+  <rect x="292" y="236" width="36" height="36" rx="6" fill="#111111" />
+  <rect x="356" y="236" width="64" height="36" rx="6" fill="#111111" />
+  <rect x="236" y="316" width="28" height="48" rx="6" fill="#111111" />
+  <rect x="292" y="300" width="48" height="48" rx="8" fill="#111111" />
+  <rect x="368" y="300" width="52" height="52" rx="8" fill="#111111" />
+  <rect x="292" y="376" width="56" height="44" rx="6" fill="#111111" />
+  <rect x="376" y="380" width="44" height="40" rx="6" fill="#111111" />
+</svg>

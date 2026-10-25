@@ -1,0 +1,121 @@
+/**
+ * QR Design Studio — Base Styles (Neo-Brutalist)
+ * Reset, typography, textured canvas, focus styles
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  color-scheme: light;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--color-canvas);
+  background-image: radial-gradient(rgba(23, 23, 23, 0.12) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+  color: var(--color-ink);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Neo-Brutalist High-Impact Selection */
+::selection {
+  background-color: var(--color-lime);
+  color: var(--color-black);
+}
+
+::-moz-selection {
+  background-color: var(--color-lime);
+  color: var(--color-black);
+}
+
+/* Accessibility: Distinctive Neo-Brutalist Focus Rings */
+:focus-visible {
+  outline: 3px solid var(--color-black) !important;
+  outline-offset: 3px !important;
+}
+
+/* Screen reader utility */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Typography elements */
+h1, h2, h3, h4 {
+  color: var(--color-ink);
+  font-weight: var(--font-weight-black);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.5px;
+}
+
+p {
+  color: var(--color-ink);
+}
+
+a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  font-weight: var(--font-weight-bold);
+  transition: all var(--transition-fast);
+}
+
+a:hover {
+  background-color: var(--color-lime);
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  user-select: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
+}
